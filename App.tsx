@@ -25,6 +25,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import LoginScreen from './app/screens/LoginScreen';
+import {ThemeProvider} from './app/context/theme/themeProvider';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -94,7 +95,9 @@ function App(): JSX.Element {
     //     </View>
     //   </ScrollView>
     // </SafeAreaView>
-    <LoginScreen/>
+    <ThemeProvider>
+      <LoginScreen />
+    </ThemeProvider>
   );
 }
 
