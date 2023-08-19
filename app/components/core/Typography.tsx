@@ -16,7 +16,7 @@ function Typography({
   return (
     <Text
       {...otherProps}
-      style={[styles[variant], styles.defaultColor, styling]}>
+      style={[styles[variant], styles.defaultStyle, styling]}>
       {children}
     </Text>
   );
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   b2: {fontSize: 15},
   b3: {fontSize: 13},
   b4: {fontSize: 11},
-  defaultColor: {color: '#000', fontFamily: 'Avenir'},
+  defaultStyle: {color: '#000', fontFamily: 'Avenir'},
 });
 
 export default Typography;
