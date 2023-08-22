@@ -1,10 +1,11 @@
-export interface ColorScheme{
-    primary: string
-    backgroundColor: string
-    text: string
+import {useColorScheme} from 'react-native';
+export interface ColorScheme {
+  primary: string;
+  backgroundColor: string;
+  text: string;
 }
 
-const primaryColor = '#22A39F'
+const primaryColor = '#22A39F';
 
 const darkMode: ColorScheme = {
   primary: primaryColor,
@@ -18,5 +19,4 @@ const lightMode: ColorScheme = {
   text: '#222222',
 };
 
-export { darkMode, lightMode };
-
+export {darkMode, lightMode};

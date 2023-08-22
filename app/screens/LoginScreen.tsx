@@ -9,7 +9,7 @@ function LoginScreen() {
   const {colors} = useTheme();
   return (
     <View style={[{backgroundColor: colors.backgroundColor}, styles.container]}>
-      <Icon name={'alien'} size={40}/>
+      <Icon name={'alien'} size={40} color={'red'}/>
       <Typography variant="h1" styling={{color: colors.text}}>Login</Typography>
       <AppTextInput/>
     </View>
