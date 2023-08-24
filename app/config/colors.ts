@@ -7,11 +7,13 @@ const utilityColors = {
 }
 
 const appThemeColors = {
-  primaryColor: '#22A39F',
-  secondaryColor: '#A32226',
+  primary: '#22A39F',
+  secondary: '#A32226',
   light: '#F3EFE0',
   gray: '#434242',
-  dark: '#222222'
+  dark: '#222222',
+  white: '#FFFFFF',
+  black: '#000000',
 }
 
 const lightMode = {
@@ -23,7 +25,7 @@ const lightMode = {
   disabledText: '#00000040',
   border: '#D9D9D9FF',
   separator: '#0505050F',
-  backgroundColor: '#F5F5F5FF',
+  background: '#F5F5F5FF',
 };
 
 const darkMode = {
@@ -35,7 +37,9 @@ const darkMode = {
   disabledText: '#FFFFFF40',
   border: '#424242FF',
   separator: '#FDFDFD1F',
-  backgroundColor: '#000000FF',
+  background: '#000000FF',
 };
 
-export {darkMode, lightMode};
+const ColorSchema = typeof lightMode
+
+export {darkMode, lightMode, ColorSchema};

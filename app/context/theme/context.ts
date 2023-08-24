@@ -1,8 +1,8 @@
 import React from "react";
-import { ColorScheme, lightMode } from "../../config/colors";
+import { lightMode, ColorSchema } from "../../config/colors";
 
 interface State{
-    colors: ColorScheme
+    colors: typeof lightMode
     setColorScheme: React.Dispatch<React.SetStateAction<any>>
 }
 
