@@ -62,15 +62,14 @@ function Button({
     }
   }, [colors]);
 
-  const buttonStyle = useMemo(() => {
-    const styling = [styles.button, backgroundColors];
-    return disabled || isLoading ? [...styling, styles.disabled] : styling;
+  const disabledStyle = useMemo(() => {
+    return disabled || isLoading ? styles.disabled : {};
   }, [isLoading, disabled]);
 
   return (
     <TouchableOpacity
       disabled={disabled || isLoading}
-      style={buttonStyle}
+      style={[styles.button, backgroundColors, disabledStyle]}
       onPress={onPress}>
       {isLoading && <ActivityIndicator color={textColors.color} />}
       <Typography styling={[textColors]}>{title}</Typography>
