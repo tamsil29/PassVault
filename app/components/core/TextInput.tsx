@@ -27,7 +27,7 @@ const AppTextInput: React.FC<TextInputProps & Props> = ({
   const {colors, isDarkMode} = useTheme()
 
   const background = useMemo(() => {
-    return isDarkMode ? {backgroundColor:colors.dark} : {backgroundColor:colors.light}
+    return isDarkMode ? {backgroundColor:colors.app.dark} : {backgroundColor:colors.app.light}
   }, [colors])
 
   return (

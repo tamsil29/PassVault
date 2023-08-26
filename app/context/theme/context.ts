@@ -1,5 +1,5 @@
 import React from "react";
-import { lightMode, ColorSchema } from "../../config/colors";
+import { lightMode } from "../../config/colors";
 
 interface State{
     colors: typeof lightMode

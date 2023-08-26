@@ -14,17 +14,17 @@ function Button({variant = 'primary', title}: Props) {
   const backgroundColors = useMemo(() => {
     switch (variant) {
       case 'primary':
-        return {backgroundColor: colors.primary};
+        return {backgroundColor: colors.app.primary};
       case 'secondary':
         return {
-          backgroundColor: colors.background,
-          borderColor: colors.primary,
+          backgroundColor: colors.theme.background,
+          borderColor: colors.app.primary,
           borderWidth: 1.5,
         };
       case 'tertiary':
         return {
-          backgroundColor: colors.background,
-          borderColor: colors.headingText,
+          backgroundColor: colors.theme.background,
+          borderColor: colors.theme.headingText,
           borderWidth: 1.5,
         };
       default:
@@ -35,13 +35,13 @@ function Button({variant = 'primary', title}: Props) {
   const textColors = useMemo(() => {
     switch (variant) {
       case 'primary':
-        return {color: colors.white};
+        return {color: colors.app.white};
       case 'secondary':
-        return {color: colors.primary};
+        return {color: colors.app.primary};
       case 'tertiary':
-        return {color: colors.headingText};
+        return {color: colors.theme.headingText};
       case 'naked':
-        return {color: colors.primary};
+        return {color: colors.app.primary};
       default:
         return {};
     }

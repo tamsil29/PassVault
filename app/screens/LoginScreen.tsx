@@ -9,9 +9,9 @@ import Button from '../components/core/Button';
 function LoginScreen() {
   const {colors} = useTheme();
   return (
-    <View style={[{backgroundColor: colors.background}, styles.container]}>
+    <View style={[{backgroundColor: colors.theme.background}, styles.container]}>
       <Icon name={'alien'} size={40} color={'red'} />
-      <Typography variant="h1" styling={{color: colors.text}}>
+      <Typography variant="h1" styling={{color: colors.theme.text}}>
         Login
       </Typography>
       <View style={{flexDirection: 'row', gap: 5, margin: 10}}>
