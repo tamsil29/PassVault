@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
   defaultStyle: {color: '#000', fontFamily: 'Avenir'},
 });
 
-export default Typography;
+export default React.memo(Typography);

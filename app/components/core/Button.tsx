@@ -1,14 +1,15 @@
-import React, { useMemo } from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import React, { Dispatch, useMemo } from 'react';
+import {View, StyleSheet, TouchableOpacity, GestureResponderEvent} from 'react-native';
 import {useTheme} from '../../context/theme/themeProvider';
 import Typography from './Typography';
 
 interface Props {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'naked';
   title: string
+  onPress: (event: GestureResponderEvent) => void
 }
 
-function Button({variant = 'primary', title}: Props) {
+function Button({variant = 'primary', title, onPress}: Props) {
   const {colors} = useTheme();
 
   const backgroundColors = useMemo(() => {
@@ -48,7 +49,7 @@ function Button({variant = 'primary', title}: Props) {
   },[colors]);
 
   return (
-    <TouchableOpacity style={[styles.button, backgroundColors]}>
+    <TouchableOpacity style={[styles.button, backgroundColors]} onPress={onPress}>
       <Typography styling={[textColors]}>{title}</Typography>
     </TouchableOpacity>
   );

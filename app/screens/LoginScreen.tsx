@@ -15,10 +15,10 @@ function LoginScreen() {
         Login
       </Typography>
       <View style={{flexDirection: 'row', gap: 5, margin: 10}}>
-      <Button variant='secondary' title={'back'}/>
-      <Button variant='primary' title={'jack'}/>
-      <Button variant='tertiary' title={'lack'}/>
-      <Button variant='naked' title={'dack'}/>
+      <Button variant='secondary' title={'back'} onPress={()=>{}}/>
+      <Button variant='primary' title={'jack'} onPress={()=>{}}/>
+      <Button variant='tertiary' title={'lack'} onPress={()=>{}}/>
+      <Button variant='naked' title={'dack'} onPress={()=>{}}/>
       </View>
       <AppTextInput />
     </View>
