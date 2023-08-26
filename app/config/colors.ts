@@ -39,4 +39,4 @@ const lightMode = {utility, app, theme: light};
 
 const darkMode = {utility, app, theme: dark};
 
-export {darkMode, lightMode};
+export { darkMode, lightMode };
