@@ -14,7 +14,12 @@ function LoginScreen() {
       <Typography variant="h1" styling={{color: colors.text}}>
         Login
       </Typography>
-      <Button variant='secondary'/>
+      <View style={{flexDirection: 'row', gap: 5, margin: 10}}>
+      <Button variant='secondary' title={'back'}/>
+      <Button variant='primary' title={'jack'}/>
+      <Button variant='tertiary' title={'lack'}/>
+      <Button variant='naked' title={'dack'}/>
+      </View>
       <AppTextInput />
     </View>
   );
