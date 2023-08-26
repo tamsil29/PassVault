@@ -1,15 +1,29 @@
-import React, { Dispatch, useMemo } from 'react';
-import {View, StyleSheet, TouchableOpacity, GestureResponderEvent} from 'react-native';
+import React, {Dispatch, useMemo} from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  GestureResponderEvent,
+  ActivityIndicator,
+} from 'react-native';
 import {useTheme} from '../../context/theme/themeProvider';
 import Typography from './Typography';
 
 interface Props {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'naked';
-  title: string
-  onPress: (event: GestureResponderEvent) => void
+  title: string;
+  onPress: (event: GestureResponderEvent) => void;
+  isLoading?: boolean;
+  disabled?: boolean;
 }
 
-function Button({variant = 'primary', title, onPress}: Props) {
+function Button({
+  variant = 'primary',
+  title,
+  onPress,
+  isLoading,
+  disabled,
+}: Props) {
   const {colors} = useTheme();
 
   const backgroundColors = useMemo(() => {
@@ -31,7 +45,7 @@ function Button({variant = 'primary', title, onPress}: Props) {
       default:
         return {};
     }
-  }, [colors])
+  }, [colors]);
 
   const textColors = useMemo(() => {
     switch (variant) {
@@ -46,10 +60,19 @@ function Button({variant = 'primary', title, onPress}: Props) {
       default:
         return {};
     }
-  },[colors]);
+  }, [colors]);
+
+  const buttonStyle = useMemo(() => {
+    const styling = [styles.button, backgroundColors];
+    return disabled || isLoading ? [...styling, styles.disabled] : styling;
+  }, [isLoading, disabled]);
 
   return (
-    <TouchableOpacity style={[styles.button, backgroundColors]} onPress={onPress}>
+    <TouchableOpacity
+      disabled={disabled || isLoading}
+      style={buttonStyle}
+      onPress={onPress}>
+      {isLoading && <ActivityIndicator color={textColors.color} />}
       <Typography styling={[textColors]}>{title}</Typography>
     </TouchableOpacity>
   );
@@ -58,11 +81,16 @@ function Button({variant = 'primary', title, onPress}: Props) {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
+    alignSelf: 'stretch',
     borderRadius: 5,
-    flex: 1,
+    gap: 10,
+    flexDirection: 'row',
     justifyContent: 'center',
-    paddingVertical: 8,
+    paddingVertical: 15,
     paddingHorizontal: 20,
+  },
+  disabled: {
+    opacity: 0.7,
   },
 });
 
