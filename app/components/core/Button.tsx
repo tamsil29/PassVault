@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {useTheme} from '../../context/theme/themeProvider';
 import Typography from './Typography';
 
 interface Props {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'naked';
-  stretch?: boolean;
   title: string
 }
 
 function Button({variant = 'primary', title}: Props) {
   const {colors} = useTheme();
 
-  const backgroundColors = () => {
+  const backgroundColors = useMemo(() => {
     switch (variant) {
       case 'primary':
         return {backgroundColor: colors.primary};
@@ -31,9 +30,9 @@ function Button({variant = 'primary', title}: Props) {
       default:
         return {};
     }
-  };
+  }, [colors])
 
-  const textColors = () => {
+  const textColors = useMemo(() => {
     switch (variant) {
       case 'primary':
         return {color: colors.white};
@@ -46,11 +45,11 @@ function Button({variant = 'primary', title}: Props) {
       default:
         return {};
     }
-  };
+  },[colors]);
 
   return (
-    <TouchableOpacity style={[styles.button, backgroundColors()]}>
-      <Typography styling={[textColors()]}>{title}</Typography>
+    <TouchableOpacity style={[styles.button, backgroundColors]}>
+      <Typography styling={[textColors]}>{title}</Typography>
     </TouchableOpacity>
   );
 }
@@ -66,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Button;
+export default React.memo(Button);

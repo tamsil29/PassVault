@@ -6,11 +6,32 @@ interface State{
     setColorScheme: React.Dispatch<React.SetStateAction<any>>
 }
 
-const initialState = {
+const initialThemeState = {
     colors: lightMode,
     setColorScheme: () => {}
 }
 
-const ThemeContext = React.createContext<State>(initialState);
+const ThemeContext = React.createContext<[State, React.Dispatch<any>]>([initialThemeState, ()=>{}]);
 
-export default ThemeContext
+ThemeContext.displayName = 'ThemeContext';
+
+enum ActionType {
+    UPDATE_THEME = 'UPDATE_THEME'
+}
+
+type Action = {
+    type: ActionType.UPDATE_THEME,
+    value: typeof lightMode
+}
+
+function themeReducer(state: State, action: Action){
+    switch(action.type){
+        case ActionType.UPDATE_THEME:
+            return {
+              ...state,
+                colors: action.value
+            }
+    }
+}
+
+export {ThemeContext, themeReducer, ActionType, initialThemeState}

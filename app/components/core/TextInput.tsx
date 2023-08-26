@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useMemo} from 'react';
 import {
   TextInput,
   View,
@@ -8,6 +8,7 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
+import { useTheme } from '../../context/theme/themeProvider';
 
 interface Props {
   preElement?: ReactNode;
@@ -23,8 +24,14 @@ const AppTextInput: React.FC<TextInputProps & Props> = ({
   textInputStyling,
   ...otherProps
 }) => {
+  const {colors, isDarkMode} = useTheme()
+
+  const background = useMemo(() => {
+    return isDarkMode ? {backgroundColor:colors.dark} : {backgroundColor:colors.light}
+  }, [colors])
+
   return (
-    <View style={[styles.container, containerStyling]}>
+    <View style={[styles.container,background, containerStyling]}>
       {preElement}
       <TextInput style={[styles.text, textInputStyling]} {...otherProps} />
       {postElement}
