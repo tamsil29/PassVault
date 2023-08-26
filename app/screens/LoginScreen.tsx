@@ -19,11 +19,11 @@ function LoginScreen() {
       <Typography variant="h1">
         login
       </Typography>
-      <View style={{flexDirection: 'row', gap: 20, width: '100%'}}>
-        {/* <Button variant='secondary' title={'back'} onPress={()=>{}}/>
-        <Button variant='primary' title={'jack'} onPress={()=>{}}/> */}
-        <Button variant='tertiary' title={'lack'} onPress={()=>{}}/>
-        <Button variant='naked' title={'dack'} onPress={()=>{}}/>
+      <View style={{ gap: 10, flexDirection: 'row', width: '100%'}}>
+        <Button variant='secondary' title={'back'} onPress={()=>{}}/>
+        <Button variant='primary' title={'jack'} onPress={()=>{}}/>
+        {/* <Button variant='tertiary' title={'lack'} onPress={()=>{}}/>
+        <Button variant='naked' title={'dack'} onPress={()=>{}}/> */}
       </View>
       <View></View>
       <AppTextInput />
