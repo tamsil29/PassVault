@@ -16,12 +16,12 @@ function LoginScreen() {
   return (
     <View style={[{backgroundColor: colors.theme.background}, styles.container]}>
       <Icon name={'alien'} size={40} color={'red'} />
-      <Typography variant="h1" styling={{color: colors.theme.text}}>
-        Login
+      <Typography variant="h1">
+        login
       </Typography>
       <View style={{flexDirection: 'row', gap: 20, width: '100%'}}>
-        <Button variant='secondary' title={'back'} onPress={()=>{}}/>
-        <Button variant='primary' title={'jack'} onPress={()=>{}}/>
+        {/* <Button variant='secondary' title={'back'} onPress={()=>{}}/>
+        <Button variant='primary' title={'jack'} onPress={()=>{}}/> */}
         <Button variant='tertiary' title={'lack'} onPress={()=>{}}/>
         <Button variant='naked' title={'dack'} onPress={()=>{}}/>
       </View>
