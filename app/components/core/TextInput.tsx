@@ -30,10 +30,12 @@ const AppTextInput: React.FC<TextInputProps & Props> = ({
     return isDarkMode ? {backgroundColor:colors.app.dark} : {backgroundColor:colors.app.white}
   }, [colors])
 
+  const textColor = useMemo(() => {return {color: colors.theme.text}},[colors])
+
   return (
     <View style={[styles.container,background, containerStyling]}>
       {preElement}
-      <TextInput style={[styles.text, textInputStyling]} {...otherProps} />
+      <TextInput style={[styles.text, textColor, textInputStyling]} {...otherProps} />
       {postElement}
     </View>
   );
