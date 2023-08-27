@@ -5,6 +5,7 @@ import {useTheme} from '../context/theme/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppTextInput from '../components/core/TextInput';
 import Button from '../components/core/Button';
+import Screen from '../components/core/Screen';
 
 function LoginScreen() {
   const {colors} = useTheme();
@@ -14,8 +15,7 @@ function LoginScreen() {
     if (isLoading) setTimeout(() => setIsLoading(false), 2000);
   }, [isLoading]);
   return (
-    <View
-      style={[{backgroundColor: colors.theme.background}, styles.container]}>
+    <Screen style={styles.container}>
       <Icon name={'alien'} size={40} color={'red'} />
       <Typography variant="h1">login</Typography>
       <View style={{gap: 10, flexDirection: 'row', width: '100%'}}>
@@ -33,7 +33,7 @@ function LoginScreen() {
         isLoading={isLoading}
         preElement={<Icon name={'logout'} size={20} color={colors.theme.text} />}
       />
-    </View>
+    </Screen>
   );
 }
 
