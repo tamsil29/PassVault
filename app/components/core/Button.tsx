@@ -1,10 +1,12 @@
-import React, {Dispatch, ReactNode, useMemo} from 'react';
+import React, {ReactNode, useMemo} from 'react';
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   GestureResponderEvent,
   ActivityIndicator,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import {useTheme} from '../../context/theme/themeProvider';
 import Typography from './Typography';
@@ -17,6 +19,7 @@ interface Props {
   disabled?: boolean;
   stretch?: boolean;
   preElement?: ReactNode;
+  styling?: StyleProp<ViewStyle>
 }
 
 function Button({
@@ -26,7 +29,8 @@ function Button({
   isLoading,
   disabled,
   stretch,
-  preElement
+  preElement,
+  styling
 }: Props) {
   const {colors} = useTheme();
 
@@ -77,7 +81,7 @@ function Button({
   return (
     <TouchableOpacity
       disabled={disabled || isLoading}
-      style={[styles.button, backgroundColors, disabledStyle, buttonStretch]}
+      style={[styles.button, backgroundColors, disabledStyle, buttonStretch, styling]}
       onPress={onPress}>
       {isLoading && <ActivityIndicator color={textColors.color} />}
       {preElement}
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
     borderRadius: 5,
-    gap: 10,
+    gap: 8,
     flexDirection: 'row',
     justifyContent: 'center',
     paddingVertical: 15,

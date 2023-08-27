@@ -3,9 +3,7 @@ import {View, StyleSheet, Text} from 'react-native';
 import Typography from '../components/core/Typography';
 import {useTheme} from '../context/theme/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import AppTextInput from '../components/core/TextInput';
-import Button from '../components/core/Button';
-import Screen from '../components/core/Screen';
+import {Screen, TextInput, Button} from '../components/core';
 
 function LoginScreen() {
   const {colors} = useTheme();
@@ -19,19 +17,24 @@ function LoginScreen() {
       <Icon name={'alien'} size={40} color={'red'} />
       <Typography variant="h1">login</Typography>
       <View style={{gap: 10, flexDirection: 'row', width: '100%'}}>
-        <Button variant="secondary" title={'back'} onPress={() => {}} stretch preElement={<Icon name={'arrow-left'} size={20} color={colors.app.primary} />}/>
-        <Button variant="primary" title={'jack'} onPress={() => {}} stretch  />
-        {/* <Button variant='tertiary' title={'lack'} onPress={()=>{}}/>
-        <Button variant='naked' title={'dack'} onPress={()=>{}}/> */}
+        <Button
+          variant="secondary"
+          title={'back'}
+          onPress={() => {}}
+          stretch
+        />
+        <Button variant="primary" title={'jack'} onPress={() => {}} stretch />
+        <Button variant='tertiary' title={'lack'} onPress={()=>{}} stretch/>
+        <Button variant='naked' title={'dack'} onPress={()=>{}} stretch/>
       </View>
       <View></View>
-      <AppTextInput />
+      <TextInput />
       <Button
         variant="primary"
         title={'Login'}
         onPress={() => setIsLoading(true)}
         isLoading={isLoading}
-        preElement={<Icon name={'logout'} size={20} color={colors.theme.text} />}
+        // preElement={<Icon name={'logout'} size={20} color={colors.theme.text} />}
       />
     </Screen>
   );
@@ -39,7 +42,6 @@ function LoginScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
