@@ -1,4 +1,4 @@
-import React, {Dispatch, useMemo} from 'react';
+import React, {Dispatch, ReactNode, useMemo} from 'react';
 import {
   View,
   StyleSheet,
@@ -16,6 +16,7 @@ interface Props {
   isLoading?: boolean;
   disabled?: boolean;
   stretch?: boolean;
+  preElement?: ReactNode;
 }
 
 function Button({
@@ -24,7 +25,8 @@ function Button({
   onPress,
   isLoading,
   disabled,
-  stretch
+  stretch,
+  preElement
 }: Props) {
   const {colors} = useTheme();
 
@@ -78,6 +80,7 @@ function Button({
       style={[styles.button, backgroundColors, disabledStyle, buttonStretch]}
       onPress={onPress}>
       {isLoading && <ActivityIndicator color={textColors.color} />}
+      {preElement}
       <Typography styling={[textColors]}>{title}</Typography>
     </TouchableOpacity>
   );
