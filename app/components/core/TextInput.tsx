@@ -44,7 +44,7 @@ const AppTextInput: React.FC<TextInputProps & Props> = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    borderRadius: 10,
+    borderRadius: 5,
     flexDirection: 'row',
     paddingHorizontal: 15,
     paddingVertical: 5,

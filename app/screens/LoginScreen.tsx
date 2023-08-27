@@ -20,8 +20,8 @@ function LoginScreen() {
         login
       </Typography>
       <View style={{ gap: 10, flexDirection: 'row', width: '100%'}}>
-        <Button variant='secondary' title={'back'} onPress={()=>{}}/>
-        <Button variant='primary' title={'jack'} onPress={()=>{}}/>
+        <Button variant='secondary' title={'back'} onPress={()=>{}} stretch/>
+        <Button variant='primary' title={'jack'} onPress={()=>{}} stretch/>
         {/* <Button variant='tertiary' title={'lack'} onPress={()=>{}}/>
         <Button variant='naked' title={'dack'} onPress={()=>{}}/> */}
       </View>

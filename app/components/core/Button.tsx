@@ -15,6 +15,7 @@ interface Props {
   onPress: (event: GestureResponderEvent) => void;
   isLoading?: boolean;
   disabled?: boolean;
+  stretch?: boolean;
 }
 
 function Button({
@@ -23,6 +24,7 @@ function Button({
   onPress,
   isLoading,
   disabled,
+  stretch
 }: Props) {
   const {colors} = useTheme();
 
@@ -66,10 +68,14 @@ function Button({
     return disabled || isLoading ? styles.disabled : {};
   }, [isLoading, disabled]);
 
+  const buttonStretch = useMemo(() => {
+    return stretch ? styles.stretch : {};
+  }, [stretch]);
+
   return (
     <TouchableOpacity
       disabled={disabled || isLoading}
-      style={[styles.button, backgroundColors, disabledStyle]}
+      style={[styles.button, backgroundColors, disabledStyle, buttonStretch]}
       onPress={onPress}>
       {isLoading && <ActivityIndicator color={textColors.color} />}
       <Typography styling={[textColors]}>{title}</Typography>
@@ -91,6 +97,9 @@ const styles = StyleSheet.create({
   disabled: {
     opacity: 0.7,
   },
+  stretch: {
+    flex: 1,
+  }
 });
 
 export default React.memo(Button);
