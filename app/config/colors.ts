@@ -9,6 +9,7 @@ const app = {
   primary: '#22A39F',
   secondary: '#A32226',
   light: '#F3EFE0',
+  lightGray: '#8c8c8c',
   gray: '#434242',
   dark: '#222222',
   white: '#FFFFFF',

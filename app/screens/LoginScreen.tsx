@@ -14,27 +14,22 @@ function LoginScreen() {
   }, [isLoading]);
   return (
     <Screen style={styles.container}>
-      <Icon name={'alien'} size={40} color={'red'} />
-      <Typography variant="h1">login</Typography>
-      <View style={{gap: 10, flexDirection: 'row', width: '100%'}}>
-        <Button
-          variant="secondary"
-          title={'back'}
-          onPress={() => {}}
-          stretch
-        />
-        <Button variant="primary" title={'jack'} onPress={() => {}} stretch />
-        <Button variant='tertiary' title={'lack'} onPress={()=>{}} stretch/>
-        <Button variant='naked' title={'dack'} onPress={()=>{}} stretch/>
-      </View>
-      <View></View>
-      <TextInput />
+      <TextInput placeholder='Email' />
+      <TextInput placeholder='Password'/>
       <Button
         variant="primary"
         title={'Login'}
         onPress={() => setIsLoading(true)}
         isLoading={isLoading}
-        // preElement={<Icon name={'logout'} size={20} color={colors.theme.text} />}
+      />
+      <Typography variant='b3' styling={{}}>OR</Typography>
+      <Button
+        variant="primary"
+        title={'Sign in with Google'}
+        onPress={() => setIsLoading(true)}
+        isLoading={isLoading}
+        preElement={<Icon name={'google'} size={20} color={colors.app.white} />}
+        styling={{backgroundColor: colors.app.secondary}}
       />
     </Screen>
   );
@@ -45,7 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-    gap: 10,
+    gap: 20,
   },
 });
 

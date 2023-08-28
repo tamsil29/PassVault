@@ -8,7 +8,7 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
-import { useTheme } from '../../context/theme/themeProvider';
+import {useTheme} from '../../context/theme/themeProvider';
 
 interface Props {
   preElement?: ReactNode;
@@ -24,18 +24,28 @@ const AppTextInput: React.FC<TextInputProps & Props> = ({
   textInputStyling,
   ...otherProps
 }) => {
-  const {colors, isDarkMode} = useTheme()
+  const {colors, isDarkMode} = useTheme();
 
   const background = useMemo(() => {
-    return isDarkMode ? {backgroundColor:colors.app.dark} : {backgroundColor:colors.app.white}
-  }, [colors])
+    return isDarkMode
+      ? {backgroundColor: colors.app.dark}
+      : {backgroundColor: colors.app.white};
+  }, [colors]);
 
-  const textColor = useMemo(() => {return {color: colors.theme.text}},[colors])
+  const textColor = useMemo(() => {
+    return {color: colors.theme.text};
+  }, [colors]);
 
   return (
-    <View style={[styles.container,background, containerStyling]}>
+    <View style={[styles.container, background, containerStyling]}>
       {preElement}
-      <TextInput style={[styles.text, textColor, textInputStyling]} {...otherProps} />
+      <TextInput
+        placeholderTextColor={
+          isDarkMode ? colors.theme.disabledText : colors.app.lightGray
+        }
+        style={[styles.text, textColor, textInputStyling]}
+        {...otherProps}
+      />
       {postElement}
     </View>
   );
@@ -43,7 +53,6 @@ const AppTextInput: React.FC<TextInputProps & Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     borderRadius: 5,
     flexDirection: 'row',
     paddingHorizontal: 15,
