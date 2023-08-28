@@ -33,7 +33,7 @@ function Typography({
         return {color: colors.theme.text}
 
     }
-  },[colors])
+  },[colors, variant])
 
   return (
     <Text
