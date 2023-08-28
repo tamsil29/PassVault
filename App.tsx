@@ -24,8 +24,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import LoginScreen from './app/screens/LoginScreen';
-import {ThemeProvider} from './app/context/theme/themeProvider';
+import LoginScreen from './src/screens/LoginScreen';
+import {ThemeProvider} from './src/context/theme/themeProvider';
 
 type SectionProps = PropsWithChildren<{
   title: string;
