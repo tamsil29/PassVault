@@ -4,6 +4,7 @@ import Typography from '../components/core/Typography';
 import {useTheme} from '../context/theme/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Screen, TextInput, Button} from '../components/core';
+import FormField from '../components/forms/FormField';
 
 function LoginScreen() {
   const {colors} = useTheme();
@@ -14,7 +15,8 @@ function LoginScreen() {
   }, [isLoading]);
   return (
     <Screen style={styles.container}>
-      <TextInput placeholder='Email' />
+      {/* <TextInput placeholder='Email' /> */}
+      <FormField placeholder='Email'/>
       <TextInput placeholder='Password'/>
       <Button
         variant="primary"
@@ -30,6 +32,13 @@ function LoginScreen() {
         isLoading={isLoading}
         preElement={<Icon name={'google'} size={20} color={colors.app.white} />}
         styling={{backgroundColor: colors.app.secondary}}
+      />
+      <Button
+        variant="naked"
+        title={'Create an account?'}
+        onPress={() => setIsLoading(true)}
+        isLoading={isLoading}
+        styling={{ position: 'absolute', bottom: 0, left: 0, right: 0}}
       />
     </Screen>
   );
