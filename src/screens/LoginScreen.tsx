@@ -23,6 +23,7 @@ function LoginScreen() {
         title={'Login'}
         onPress={() => setIsLoading(true)}
         isLoading={isLoading}
+        disabled
       />
       <Typography variant='b3' styling={{}}>OR</Typography>
       <Button

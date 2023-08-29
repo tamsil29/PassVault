@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   disabled: {
-    opacity: 0.7,
+    opacity: 0.6,
   },
   stretch: {
     flex: 1,
