@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Screen, TextInput, Button} from '../components/core';
 import FormField from '../components/forms/FormField';
 import {useForm} from 'react-hook-form';
-import {ZodType, z} from 'zod';
+import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 
 function LoginScreen() {
@@ -42,18 +42,22 @@ function LoginScreen() {
         name={'email'}
         control={control}
         preElement={
-          <Icon name={'email-outline'} size={25} color={colors.theme.secondaryText} />
+          <Icon name={'email-outline'} size={25} color={colors.theme.text} />
         }
       />
       <FormField
+        textContentType="password"
+        secureTextEntry={!passwordVisible}
         placeholder="Password"
         name={'password'}
         control={control}
         preElement={
           <Icon
-            name={passwordVisible ? 'lock-open-variant-outline' : 'lock-outline'}
+            name={
+              passwordVisible ? 'lock-open-variant-outline' : 'lock-outline'
+            }
             size={25}
-            color={colors.theme.secondaryText}
+            color={colors.theme.text}
           />
         }
         postElement={
