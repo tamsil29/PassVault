@@ -15,7 +15,8 @@ function LoginScreen() {
     .object({
       email: z.string().nonempty('Email is required').email(),
       password: z
-        .string().nonempty('Password is required')
+        .string()
+        .nonempty('Password is required')
         .min(8, {message: 'Password must be at least 8 characters'}),
     })
     .required();
@@ -40,86 +41,95 @@ function LoginScreen() {
   }, [isLoading]);
 
   return (
-
-    <Screen style={styles.container} >
-      <Logo style={styles.logo}/>
+    <Screen style={styles.container}>
+      <Logo style={styles.logo} />
       <View style={styles.formContainer}>
-      <FormField
-        placeholder="Email"
-        name={'email'}
-        control={control}
-        preElement={
-          <Icon name={'email-outline'} size={25} color={colors.theme.text} />
-        }
-      />
-      <FormField
-        textContentType="password"
-        secureTextEntry={!passwordVisible}
-        placeholder="Password"
-        name={'password'}
-        control={control}
-        preElement={
-          <Icon
-            name={
-              passwordVisible ? 'lock-open-variant-outline' : 'lock-outline'
-            }
-            size={25}
-            color={colors.theme.text}
-          />
-        }
-        postElement={
-          <Icon
-            name={passwordVisible ? 'eye-outline' : 'eye-off-outline'}
-            size={25}
-            color={
-              passwordVisible ? colors.theme.text : colors.theme.secondaryText
-            }
-            onPress={() => setPasswordVisible(!passwordVisible)}
-          />
-        }
-      />
-      <Button
-        variant="primary"
-        title={'Login'}
-        onPress={handleSubmit(onSubmit)}
-        isLoading={isLoading}
-      />
-      <Typography variant="b3" styling={{}}>
-        OR
-      </Typography>
-      <Button
-        variant="primary"
-        title={'Sign in with Google'}
-        onPress={() => setIsLoading(true)}
-        isLoading={isLoading}
-        preElement={<Icon name={'google'} size={20} color={colors.app.white} />}
-        styling={{backgroundColor: colors.app.secondary}}
-      /></View>
+        <FormField
+          placeholder="Email"
+          name={'email'}
+          control={control}
+          preElement={
+            <Icon name={'email-outline'} size={25} color={colors.theme.text} />
+          }
+        />
+        <FormField
+          textContentType="password"
+          secureTextEntry={!passwordVisible}
+          placeholder="Password"
+          name={'password'}
+          control={control}
+          preElement={
+            <Icon
+              name={
+                passwordVisible ? 'lock-open-variant-outline' : 'lock-outline'
+              }
+              size={25}
+              color={colors.theme.text}
+            />
+          }
+          postElement={
+            <Icon
+              name={passwordVisible ? 'eye-outline' : 'eye-off-outline'}
+              size={25}
+              color={
+                passwordVisible ? colors.theme.text : colors.theme.secondaryText
+              }
+              onPress={() => setPasswordVisible(!passwordVisible)}
+            />
+          }
+        />
+        <Button
+          variant="primary"
+          title={'Login'}
+          onPress={handleSubmit(onSubmit)}
+          isLoading={isLoading}
+        />
+        <Typography variant="b3">
+          OR
+        </Typography>
+        <Button
+          variant="primary"
+          title={'Sign in with Google'}
+          onPress={() => setIsLoading(true)}
+          isLoading={isLoading}
+          preElement={
+            <Icon name={'google'} size={20} color={colors.app.white} />
+          }
+          styling={{backgroundColor: colors.app.secondary}}
+        />
+      </View>
       <Button
         variant="naked"
         title={'Create an account?'}
         onPress={() => setIsLoading(true)}
         isLoading={isLoading}
-        styling={{position: 'absolute', bottom: 0, left: 0, right: 0}}
+        styling={styles.bottomButton}
       />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  bottomButton:{
+    position: 'absolute', 
+    bottom: 0, 
+    left: 0, 
+    right: 0
+  },
   container: {
     alignItems: 'center',
     padding: 10,
-  },
-  logo:{
-    marginVertical: 120
   },
   formContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     gap: 20,
     width: '100%',
-  }
+  },
+  logo: {
+    marginVertical: 120,
+  },
+
 });
 
 export default LoginScreen;
