@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Typography from '../components/core/Typography';
 import {useTheme} from '../context/theme/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Screen, TextInput, Button} from '../components/core';
+import {Screen, Button} from '../components/core';
 import FormField from '../components/forms/FormField';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
+import Logo from '../components/Logo';
 
 function LoginScreen() {
   const validationSchema = z
@@ -24,7 +25,7 @@ function LoginScreen() {
   const {colors} = useTheme();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const {handleSubmit, control, formState: {errors}} = useForm<CredentialsType>({
+  const {handleSubmit, control} = useForm<CredentialsType>({
     defaultValues: {
       email: '',
       password: '',
@@ -39,7 +40,10 @@ function LoginScreen() {
   }, [isLoading]);
 
   return (
-    <Screen style={styles.container}>
+
+    <Screen style={styles.container} >
+      <Logo style={styles.logo}/>
+      <View style={styles.formContainer}>
       <FormField
         placeholder="Email"
         name={'email'}
@@ -90,7 +94,7 @@ function LoginScreen() {
         isLoading={isLoading}
         preElement={<Icon name={'google'} size={20} color={colors.app.white} />}
         styling={{backgroundColor: colors.app.secondary}}
-      />
+      /></View>
       <Button
         variant="naked"
         title={'Create an account?'}
@@ -104,11 +108,18 @@ function LoginScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-    gap: 20,
   },
+  logo:{
+    marginVertical: 120
+  },
+  formContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 20,
+    width: '100%',
+  }
 });
 
 export default LoginScreen;
