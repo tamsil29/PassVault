@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Typography from '../components/core/Typography';
 import {useTheme} from '../context/theme/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,15 +12,19 @@ import {zodResolver} from '@hookform/resolvers/zod';
 function LoginScreen() {
   const validationSchema = z
     .object({
-      email: z.string().email(),
-      password: z.string().min(8),
+      email: z.string().nonempty('Email is required').email(),
+      password: z
+        .string().nonempty('Password is required')
+        .min(8, {message: 'Password must be at least 8 characters'}),
     })
     .required();
+
+  type CredentialsType = z.infer<typeof validationSchema>;
 
   const {colors} = useTheme();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const {handleSubmit, control, formState} = useForm({
+  const {handleSubmit, control, formState: {errors}} = useForm<CredentialsType>({
     defaultValues: {
       email: '',
       password: '',
@@ -28,7 +32,7 @@ function LoginScreen() {
     resolver: zodResolver(validationSchema),
   });
 
-  const onSubmit = (data: any) => console.log(JSON.stringify(data));
+  const onSubmit = (data: CredentialsType) => console.log(JSON.stringify(data));
 
   useEffect(() => {
     if (isLoading) setTimeout(() => setIsLoading(false), 2000);
@@ -36,7 +40,6 @@ function LoginScreen() {
 
   return (
     <Screen style={styles.container}>
-      {/* <TextInput placeholder='Email' /> */}
       <FormField
         placeholder="Email"
         name={'email'}

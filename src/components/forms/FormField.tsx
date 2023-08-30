@@ -36,8 +36,6 @@ function FormField({
   const {colors} = useTheme();
   const {field, fieldState} = useController({name, control});
 
-  console.log(name, fieldState)
-
   const inputContainer: StyleProp<ViewStyle> = useMemo(() => {
     if (fieldState.invalid) {
       return {
