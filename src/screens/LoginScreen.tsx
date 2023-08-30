@@ -9,18 +9,16 @@ import {useForm} from 'react-hook-form';
 import {ZodType, z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 
-type FormData = {
-  email: string;
-  password: string;
-};
-
 function LoginScreen() {
-  const validationSchema: ZodType<FormData> = z.object({
-    email: z.string().email(),
-    password: z.string().min(8),
-  });
+  const validationSchema = z
+    .object({
+      email: z.string().email(),
+      password: z.string().min(8),
+    })
+    .required();
 
   const {colors} = useTheme();
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const {handleSubmit, control, formState} = useForm({
     defaultValues: {
@@ -30,19 +28,45 @@ function LoginScreen() {
     resolver: zodResolver(validationSchema),
   });
 
-  console.log(formState.errors)
-
   const onSubmit = (data: any) => console.log(JSON.stringify(data));
 
   useEffect(() => {
     if (isLoading) setTimeout(() => setIsLoading(false), 2000);
   }, [isLoading]);
-  
+
   return (
     <Screen style={styles.container}>
       {/* <TextInput placeholder='Email' /> */}
-      <FormField placeholder="Email" name={'email'} control={control} />
-      <FormField placeholder="Password" name={'password'} control={control} />
+      <FormField
+        placeholder="Email"
+        name={'email'}
+        control={control}
+        preElement={
+          <Icon name={'email-outline'} size={25} color={colors.theme.secondaryText} />
+        }
+      />
+      <FormField
+        placeholder="Password"
+        name={'password'}
+        control={control}
+        preElement={
+          <Icon
+            name={passwordVisible ? 'lock-open-variant-outline' : 'lock-outline'}
+            size={25}
+            color={colors.theme.secondaryText}
+          />
+        }
+        postElement={
+          <Icon
+            name={passwordVisible ? 'eye-outline' : 'eye-off-outline'}
+            size={25}
+            color={
+              passwordVisible ? colors.theme.text : colors.theme.secondaryText
+            }
+            onPress={() => setPasswordVisible(!passwordVisible)}
+          />
+        }
+      />
       <Button
         variant="primary"
         title={'Login'}
