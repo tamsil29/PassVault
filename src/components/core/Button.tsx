@@ -19,7 +19,7 @@ interface Props {
   disabled?: boolean;
   stretch?: boolean;
   preElement?: ReactNode;
-  styling?: StyleProp<ViewStyle>
+  style?: StyleProp<ViewStyle>
 }
 
 function Button({
@@ -30,7 +30,7 @@ function Button({
   disabled,
   stretch,
   preElement,
-  styling
+  style
 }: Props) {
   const {colors} = useTheme();
 
@@ -81,7 +81,7 @@ function Button({
   return (
     <TouchableOpacity
       disabled={disabled || isLoading}
-      style={[styles.button, backgroundColors, disabledStyle, buttonStretch, styling]}
+      style={[styles.button, backgroundColors, disabledStyle, buttonStretch, style]}
       onPress={onPress}>
       {isLoading && <ActivityIndicator color={textColors.color} />}
       {preElement}

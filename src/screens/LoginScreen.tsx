@@ -95,7 +95,7 @@ function LoginScreen() {
           preElement={
             <Icon name={'google'} size={20} color={colors.app.white} />
           }
-          styling={{backgroundColor: colors.app.secondary}}
+          style={{backgroundColor: colors.app.secondary}}
         />
       </View>
       <Button
@@ -103,7 +103,7 @@ function LoginScreen() {
         title={'Create an account?'}
         onPress={() => setIsLoading(true)}
         isLoading={isLoading}
-        styling={styles.bottomButton}
+        style={styles.bottomButton}
       />
     </Screen>
   );
