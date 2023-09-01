@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 
-import LoginScreen from './src/screens/LoginScreen';
-import {ThemeProvider} from './src/context/theme/themeProvider';
+import LoginScreen from '@screens/LoginScreen';
+import {ThemeProvider} from '@context/theme/themeProvider';
 
 function App(): JSX.Element {
   return (
