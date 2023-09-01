@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
 import {useTheme} from '../context/theme/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Screen, Button, Typography} from '@components/core';
@@ -102,31 +102,26 @@ function LoginScreen() {
         title={'Create an account?'}
         onPress={() => setIsLoading(true)}
         isLoading={isLoading}
-        style={styles.bottomButton}
       />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  bottomButton:{
-    position: 'absolute', 
-    bottom: 0, 
-    left: 0, 
-    right: 0
-  },
   container: {
     alignItems: 'center',
     padding: 10,
+    justifyContent: 'space-between',
   },
   formContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     gap: 20,
     width: '100%',
+    marginVertical: 150
   },
   logo: {
-    marginVertical: 120,
+    marginTop: 120,
   },
 
 });
