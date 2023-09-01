@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import Typography from '../components/core/Typography';
 import {useTheme} from '../context/theme/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Screen, Button} from '../components/core';
-import FormField from '../components/forms/FormField';
+import {Screen, Button, Typography} from '@components/core';
+import FormField from '@components/forms/FormField';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
-import Logo from '../components/Logo';
+import Logo from '@components/Logo';
 
 function LoginScreen() {
   const validationSchema = z
