@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
-import {useTheme} from '../context/theme/themeProvider';
+import {StyleSheet, View} from 'react-native';
+import {useTheme} from '@context/theme/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Screen, Button, Typography} from '@components/core';
 import FormField from '@components/forms/FormField';
