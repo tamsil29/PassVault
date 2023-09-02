@@ -11,9 +11,9 @@ import {
 import {TextInput, Typography} from '../core';
 import ErrorMessage from './ErrorMessage';
 import {useTheme} from '../../context/theme/themeProvider';
-import {useController} from 'react-hook-form';
+import {UseControllerProps, useController} from 'react-hook-form';
 
-interface Props {
+interface Props extends UseControllerProps {
   preElement?: ReactNode;
   containerStyling?: StyleProp<ViewStyle>;
   postElement?: ReactNode;
@@ -29,10 +29,11 @@ function FormField({
   textInputStyling,
   width = '100%',
   name,
+  rules,
   ...otherProps
 }: TextInputProps & Props) {
   const {colors} = useTheme();
-  const {field, fieldState} = useController({name});
+  const {field, fieldState} = useController({name, rules});
 
   const inputContainer: StyleProp<ViewStyle> = useMemo(() => {
     if (fieldState.invalid) {

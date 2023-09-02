@@ -45,6 +45,7 @@ function LoginScreen() {
       <FormProvider {...methods}>
         <View style={styles.formContainer}>
           <FormField
+            keyboardType="email-address"
             placeholder="Email"
             name={'email'}
             preElement={
