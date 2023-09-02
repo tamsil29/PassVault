@@ -11,7 +11,7 @@ import {
 import {TextInput, Typography} from '../core';
 import ErrorMessage from './ErrorMessage';
 import {useTheme} from '../../context/theme/themeProvider';
-import {Control, useController} from 'react-hook-form';
+import {useController} from 'react-hook-form';
 
 interface Props {
   preElement?: ReactNode;
@@ -20,7 +20,6 @@ interface Props {
   textInputStyling?: StyleProp<TextStyle>;
   width?: DimensionValue;
   name: string;
-  control: Control<any>
 }
 
 function FormField({
@@ -30,11 +29,10 @@ function FormField({
   textInputStyling,
   width = '100%',
   name,
-  control,
   ...otherProps
 }: TextInputProps & Props) {
   const {colors} = useTheme();
-  const {field, fieldState} = useController({name, control});
+  const {field, fieldState} = useController({name});
 
   const inputContainer: StyleProp<ViewStyle> = useMemo(() => {
     if (fieldState.invalid) {
@@ -51,14 +49,14 @@ function FormField({
   return (
     <View style={[styles.container, {width}]}>
       <TextInput
-        preElement={preElement}
         containerStyling={inputContainer}
-        postElement={postElement}
-        textInputStyling={textInputStyling}
-        {...otherProps}
-        onChangeText={field.onChange}
         onBlur={field.onBlur}
+        onChangeText={field.onChange}
+        postElement={postElement}
+        preElement={preElement}
+        textInputStyling={textInputStyling}
         value={field.value}
+        {...otherProps}
       />
       <ErrorMessage error={fieldState.error?.message} visible={fieldState.invalid} />
     </View>

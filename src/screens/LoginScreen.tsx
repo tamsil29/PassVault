@@ -4,7 +4,7 @@ import {useTheme} from '@context/theme/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Screen, Button, Typography} from '@components/core';
 import FormField from '@components/forms/FormField';
-import {useForm} from 'react-hook-form';
+import {FormProvider, useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import Logo from '@components/Logo';
@@ -25,7 +25,7 @@ function LoginScreen() {
   const {colors} = useTheme();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const {handleSubmit, control} = useForm<CredentialsType>({
+  const {...methods} = useForm<CredentialsType>({
     defaultValues: {
       email: '',
       password: '',
@@ -42,61 +42,65 @@ function LoginScreen() {
   return (
     <Screen style={styles.container}>
       <Logo style={styles.logo} />
-      <View style={styles.formContainer}>
-        <FormField
-          placeholder="Email"
-          name={'email'}
-          control={control}
-          preElement={
-            <Icon name={'email-outline'} size={25} color={colors.theme.text} />
-          }
-        />
-        <FormField
-          textContentType="password"
-          secureTextEntry={!passwordVisible}
-          placeholder="Password"
-          name={'password'}
-          control={control}
-          preElement={
-            <Icon
-              name={
-                passwordVisible ? 'lock-open-variant-outline' : 'lock-outline'
-              }
-              size={25}
-              color={colors.theme.text}
-            />
-          }
-          postElement={
-            <Icon
-              name={passwordVisible ? 'eye-outline' : 'eye-off-outline'}
-              size={25}
-              color={
-                passwordVisible ? colors.theme.text : colors.theme.secondaryText
-              }
-              onPress={() => setPasswordVisible(!passwordVisible)}
-            />
-          }
-        />
-        <Button
-          variant="primary"
-          title={'Login'}
-          onPress={handleSubmit(onSubmit)}
-          isLoading={isLoading}
-        />
-        <Typography variant="b3">
-          OR
-        </Typography>
-        <Button
-          variant="primary"
-          title={'Sign in with Google'}
-          onPress={() => setIsLoading(true)}
-          isLoading={isLoading}
-          preElement={
-            <Icon name={'google'} size={20} color={colors.app.white} />
-          }
-          style={{backgroundColor: colors.app.secondary}}
-        />
-      </View>
+      <FormProvider {...methods}>
+        <View style={styles.formContainer}>
+          <FormField
+            placeholder="Email"
+            name={'email'}
+            preElement={
+              <Icon
+                name={'email-outline'}
+                size={25}
+                color={colors.theme.text}
+              />
+            }
+          />
+          <FormField
+            textContentType="password"
+            secureTextEntry={!passwordVisible}
+            placeholder="Password"
+            name={'password'}
+            preElement={
+              <Icon
+                name={
+                  passwordVisible ? 'lock-open-variant-outline' : 'lock-outline'
+                }
+                size={25}
+                color={colors.theme.text}
+              />
+            }
+            postElement={
+              <Icon
+                name={passwordVisible ? 'eye-outline' : 'eye-off-outline'}
+                size={25}
+                color={
+                  passwordVisible
+                    ? colors.theme.text
+                    : colors.theme.secondaryText
+                }
+                onPress={() => setPasswordVisible(!passwordVisible)}
+              />
+            }
+          />
+          <Button
+            variant="primary"
+            title={'Login'}
+            onPress={methods.handleSubmit(onSubmit)}
+            isLoading={isLoading}
+          />
+          <Typography variant="b3">OR</Typography>
+          <Button
+            variant="primary"
+            title={'Sign in with Google'}
+            onPress={() => setIsLoading(true)}
+            isLoading={isLoading}
+            preElement={
+              <Icon name={'google'} size={20} color={colors.app.white} />
+            }
+            style={{backgroundColor: colors.app.secondary}}
+          />
+        </View>
+      </FormProvider>
       <Button
         variant="naked"
         title={'Create an account?'}
@@ -118,12 +122,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 20,
     width: '100%',
-    marginVertical: 150
+    marginVertical: 150,
   },
   logo: {
     marginTop: 120,
   },
-
 });
 
 export default LoginScreen;
