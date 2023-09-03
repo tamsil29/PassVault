@@ -9,7 +9,7 @@ import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 
-function SignUpScreen() {
+function SignupScreen() {
   const validationSchema = z
     .object({
       name: z.string().nonempty('Name is required'),
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
   container: {},
 });
 
-export default SignUpScreen;
+export default SignupScreen;

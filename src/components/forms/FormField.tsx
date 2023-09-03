@@ -13,7 +13,7 @@ import ErrorMessage from './ErrorMessage';
 import {useTheme} from '../../context/theme/themeProvider';
 import {UseControllerProps, useController} from 'react-hook-form';
 
-interface Props extends UseControllerProps {
+export interface FormFieldProps extends UseControllerProps {
   preElement?: ReactNode;
   containerStyling?: StyleProp<ViewStyle>;
   postElement?: ReactNode;
@@ -31,7 +31,7 @@ function FormField({
   name,
   rules,
   ...otherProps
-}: TextInputProps & Props) {
+}: TextInputProps & FormFieldProps) {
   const {colors} = useTheme();
   const {field, fieldState} = useController({name, rules});
 
