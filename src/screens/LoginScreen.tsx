@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 20,
     width: '100%',
-    marginVertical: 150,
+    marginVertical: 100,
   },
   logo: {
     marginTop: 120,
