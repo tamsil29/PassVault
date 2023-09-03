@@ -45,9 +45,6 @@ function SignupForm({onSubmit}: Props) {
     resolver: zodResolver(validationSchema),
   });
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-
   return (
     <FormProvider {...methods}>
       <FormField
