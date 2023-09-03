@@ -1,58 +1,68 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import Typography from '../components/core/Typography';
-import {useTheme} from '../context/theme/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Screen, TextInput, Button} from '../components/core';
-import FormField from '../components/forms/FormField';
-import {useForm} from 'react-hook-form';
-import {z} from 'zod';
-import {zodResolver} from '@hookform/resolvers/zod';
 
-function SignupScreen() {
-  const validationSchema = z
-    .object({
-      name: z.string().nonempty('Name is required'),
-      email: z.string().nonempty('Email is required').email(),
-      password: z
-        .string()
-        .nonempty('Password is required')
-        .min(8, {message: 'Password must be at least 8 characters'})
-        .max(20, {message: 'Password must be less than 20 characters'}),
-      confirmPassword: z
-        .string()
-        .nonempty('Confirm Password is required')
-    })
-    .refine(data => data.password === data.confirmPassword, {
-      message: 'Passwords does not match',
-      path: ['confirmPassword'],
-    });
+import {useTheme} from '@context/theme/themeProvider';
+import {Screen, Button, Typography} from '@components/core';
+import Logo from '@components/Logo';
+import {SignupForm} from '@components/forms';
 
-  type CredentialsType = z.infer<typeof validationSchema>;
-
+function LoginScreen() {
   const {colors} = useTheme();
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-  const {handleSubmit, control} = useForm<CredentialsType>({
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    },
-    resolver: zodResolver(validationSchema),
-  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubmit = (data: Record<string, unknown>) =>
+    console.log(JSON.stringify(data));
+
+  useEffect(() => {
+    if (isLoading) setTimeout(() => setIsLoading(false), 2000);
+  }, [isLoading]);
 
   return (
-    <Screen>
-      <View style={styles.container}></View>
+    <Screen style={styles.container}>
+      <Logo style={styles.logo} />
+      <View style={styles.formContainer}>
+        <SignupForm onSubmit={onSubmit} />
+        {/* <Typography variant="b3">OR</Typography>
+        <Button
+          variant="primary"
+          title={'Sign in with Google'}
+          onPress={() => setIsLoading(true)}
+          isLoading={isLoading}
+          preElement={
+            <Icon name={'google'} size={20} color={colors.app.white} />
+          }
+          style={{backgroundColor: colors.app.secondary}}
+        /> */}
+      </View>
+
+      <Button
+        variant="naked"
+        title={'Have an account?'}
+        onPress={() => setIsLoading(true)}
+        isLoading={isLoading}
+      />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    alignItems: 'center',
+    padding: 10,
+    justifyContent: 'space-between',
+  },
+  formContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 20,
+    width: '100%',
+    marginVertical: 100,
+  },
+  logo: {
+    marginTop: 120,
+  },
 });
 
-export default SignupScreen;
+export default LoginScreen;

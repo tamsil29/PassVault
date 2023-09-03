@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TextInputProps} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {FormField} from '@components/forms';
@@ -7,7 +7,7 @@ import {useTheme} from '@context/theme/themeProvider';
 import { FormFieldProps } from '@components/forms/FormField';
 
 
-function PasswordFormField({...props}: FormFieldProps) {
+function PasswordFormField({...props}: FormFieldProps & TextInputProps) {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const {colors} = useTheme();
 

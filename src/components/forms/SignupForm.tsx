@@ -50,12 +50,21 @@ function SignupForm({onSubmit}: Props) {
       <FormField
         keyboardType="email-address"
         placeholder="Email"
+        name={'name'}
+        preElement={
+          <Icon name={'account'} size={25} color={colors.theme.text} />
+        }
+      />
+      <FormField
+        keyboardType="email-address"
+        placeholder="Email"
         name={'email'}
         preElement={
           <Icon name={'email-outline'} size={25} color={colors.theme.text} />
         }
       />
-      <PasswordFormField name={'password'} />
+      <PasswordFormField name={'password'} placeholder={'Password'} />
+      <PasswordFormField name={'confirmPassword'} placeholder={'Confirm Password'} />
       <Button
         variant="primary"
         title={'Register'}
