@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { StyleSheet, SafeAreaView, StyleProp, ViewStyle } from 'react-native'
-import { useTheme } from '../../context/theme/themeProvider';
+
+import { useTheme } from '@context/theme/themeProvider';
 
 interface Props{
     children: React.ReactNode;

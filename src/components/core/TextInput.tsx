@@ -8,7 +8,8 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
-import {useTheme} from '../../context/theme/themeProvider';
+
+import {useTheme} from '@context/theme/themeProvider';
 
 interface Props {
   preElement?: ReactNode;

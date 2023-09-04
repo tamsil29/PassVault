@@ -8,8 +8,9 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
-import {useTheme} from '../../context/theme/themeProvider';
-import Typography from './Typography';
+
+import {useTheme} from '@context/theme/themeProvider';
+import {Typography} from '@components/core';
 
 interface Props {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'naked';

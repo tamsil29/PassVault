@@ -8,9 +8,10 @@ import {
   TextStyle,
   DimensionValue,
 } from 'react-native';
-import {TextInput, Typography} from '../core';
-import ErrorMessage from './ErrorMessage';
-import {useTheme} from '../../context/theme/themeProvider';
+
+import {TextInput} from '@components/core';
+import {ErrorMessage} from '@components/forms';
+import {useTheme} from '@context/theme/themeProvider';
 import {UseControllerProps, useController} from 'react-hook-form';
 
 export interface FormFieldProps extends UseControllerProps {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Typography } from '../core';
-import { useTheme } from '../../context/theme/themeProvider';
+
+import { Typography } from '@components/core';
+import { useTheme } from '@context/theme/themeProvider';
 
 interface Props{
     error: string | any
