@@ -43,13 +43,14 @@ function SignupForm({onSubmit}: Props) {
       confirmPassword: '',
     },
     resolver: zodResolver(validationSchema),
+    mode: 'onTouched'
   });
 
   return (
     <FormProvider {...methods}>
       <FormField
         keyboardType="email-address"
-        placeholder="Email"
+        placeholder="Name"
         name={'name'}
         preElement={
           <Icon name={'account'} size={25} color={colors.theme.text} />

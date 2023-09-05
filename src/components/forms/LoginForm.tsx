@@ -34,6 +34,7 @@ function LoginForm({onSubmit}: Props) {
       password: '',
     },
     resolver: zodResolver(validationSchema),
+    mode: 'onTouched'
   });
 
   const [passwordVisible, setPasswordVisible] = useState(false);
