@@ -6,7 +6,8 @@ module.exports = {
         "@src": "./src",
         "@screens": "./src/screens",
         "@components": "./src/components",
-        "@context": "./src/context"
+        "@context": "./src/context",
+        "@navigation": "./src/navigation"
       }
     }]
   ]

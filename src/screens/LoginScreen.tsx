@@ -6,9 +6,11 @@ import {useTheme} from '@context/theme/themeProvider';
 import {Screen, Button, Typography} from '@components/core';
 import Logo from '@components/Logo';
 import {LoginForm} from '@components/forms';
+import useRouteNavigation from '../hooks/useRouteNavigation';
 
 function LoginScreen() {
   const {colors} = useTheme();
+  const {navigate} = useRouteNavigation()
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,8 +42,7 @@ function LoginScreen() {
       <Button
         variant="naked"
         title={'Create an account?'}
-        onPress={() => setIsLoading(true)}
-        isLoading={isLoading}
+        onPress={() => navigate('Signup')}
       />
     </Screen>
   );

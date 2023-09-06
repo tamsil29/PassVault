@@ -6,18 +6,14 @@ import {useTheme} from '@context/theme/themeProvider';
 import {Screen, Button, Typography} from '@components/core';
 import Logo from '@components/Logo';
 import {SignupForm} from '@components/forms';
+import useRouteNavigation from '../hooks/useRouteNavigation';
 
-function LoginScreen() {
+function SignUpScreen() {
   const {colors} = useTheme();
-
-  const [isLoading, setIsLoading] = useState(false);
+  const {navigate} = useRouteNavigation()
 
   const onSubmit = (data: Record<string, unknown>) =>
     console.log(JSON.stringify(data));
-
-  useEffect(() => {
-    if (isLoading) setTimeout(() => setIsLoading(false), 2000);
-  }, [isLoading]);
 
   return (
     <Screen style={styles.container}>
@@ -40,8 +36,7 @@ function LoginScreen() {
       <Button
         variant="naked"
         title={'Have an account?'}
-        onPress={() => setIsLoading(true)}
-        isLoading={isLoading}
+        onPress={() => navigate('Login')}
       />
     </Screen>
   );
@@ -65,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignUpScreen;

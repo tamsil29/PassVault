@@ -1,15 +1,16 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 
-import LoginScreen from '@screens/LoginScreen';
-import SignupScreen from '@screens/SignupScreen';
-import {ThemeProvider} from '@context/theme/themeProvider';
+import { ThemeProvider } from '@context/theme/themeProvider';
+import { NavigationContainer } from '@react-navigation/native';
+import AuthNavigator from '@navigation/AuthNavigator';
 
 function App(): JSX.Element {
   return (
     <ThemeProvider>
-      {/* <LoginScreen /> */}
-      <SignupScreen />
+      <NavigationContainer>
+        <AuthNavigator/>
+      </NavigationContainer>
     </ThemeProvider>
   );
 }
