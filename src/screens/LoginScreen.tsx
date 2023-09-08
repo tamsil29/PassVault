@@ -7,6 +7,7 @@ import {Screen, Button, Typography} from '@components/core';
 import Logo from '@components/Logo';
 import {LoginForm} from '@components/forms';
 import useRouteNavigation from '@hooks/useRouteNavigation';
+import { RouteEnums } from '@navigation/Routes';
 
 function LoginScreen() {
   const {colors} = useTheme();
@@ -42,7 +43,7 @@ function LoginScreen() {
       <Button
         variant="naked"
         title={'Create an account?'}
-        onPress={() => navigate('Signup')}
+        onPress={() => navigate(RouteEnums.SIGNUP_SCREEN)}
       />
     </Screen>
   );
