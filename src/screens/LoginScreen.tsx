@@ -6,7 +6,7 @@ import {useTheme} from '@context/theme/themeProvider';
 import {Screen, Button, Typography} from '@components/core';
 import Logo from '@components/Logo';
 import {LoginForm} from '@components/forms';
-import useRouteNavigation from '../hooks/useRouteNavigation';
+import useRouteNavigation from '@hooks/useRouteNavigation';
 
 function LoginScreen() {
   const {colors} = useTheme();

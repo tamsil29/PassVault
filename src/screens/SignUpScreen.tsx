@@ -6,7 +6,7 @@ import {useTheme} from '@context/theme/themeProvider';
 import {Screen, Button, Typography} from '@components/core';
 import Logo from '@components/Logo';
 import {SignupForm} from '@components/forms';
-import useRouteNavigation from '../hooks/useRouteNavigation';
+import useRouteNavigation from '@hooks/useRouteNavigation';
 
 function SignUpScreen() {
   const {colors} = useTheme();
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 20,
     width: '100%',
-    marginVertical: 100,
+    marginVertical: 80,
   },
   logo: {
     marginTop: 120,

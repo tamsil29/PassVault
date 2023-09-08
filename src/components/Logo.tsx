@@ -1,6 +1,6 @@
 import React from 'react';
 import {  StyleSheet, Image, StyleProp, ImageStyle } from 'react-native'
-import PassVaultLogo from '../assets/logo.png'
+import PassVaultLogo from '@assets/logo.png'
 
 function Logo({style}:{style?: StyleProp<ImageStyle>}) {
     return (
