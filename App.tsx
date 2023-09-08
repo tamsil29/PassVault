@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import AuthNavigator from '@navigation/AuthNavigator';
 
 function App(): JSX.Element {
+
   return (
     <ThemeProvider>
       <NavigationContainer>

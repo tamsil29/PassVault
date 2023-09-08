@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "117276204222",
+    "project_id": "pass-vault-29",
+    "storage_bucket": "pass-vault-29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117276204222:android:0e35b015d88c131c7e92ef",
+        "android_client_info": {
+          "package_name": "com.blurry29.PassVault"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC--EVrKlT0Rtufdvj9lb78gv4NGcEuMiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
