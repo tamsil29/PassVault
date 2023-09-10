@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {StyleSheet} from 'react-native';
 
 import { ThemeProvider } from '@context/theme/ThemeProvider';
@@ -11,6 +11,13 @@ function App(): JSX.Element {
   const user = auth().currentUser;
 
   console.log(user)
+
+  useEffect(() => {
+    auth().onAuthStateChanged(userState => {
+      console.log(userState)
+    });
+  }, []);
+
   return (
     <ThemeProvider>
       <NavigationContainer>

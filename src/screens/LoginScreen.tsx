@@ -13,7 +13,7 @@ import useFirebaseAuth from '@hooks/useFirebaseAuth';
 function LoginScreen() {
   const {colors} = useTheme();
   const {navigate} = useRouteNavigation()
-  const {firebaseAuth} = useFirebaseAuth()
+  const {firebaseAuth, signInWithGoogle} = useFirebaseAuth()
 
   const onSubmit = async (data: Record<string, unknown|string>) =>{
     console.log(JSON.stringify(data));
@@ -34,7 +34,9 @@ function LoginScreen() {
         <Button
           variant="primary"
           title={'Sign in with Google'}
-          onPress={() => {}}
+          onPress={() => {
+            signInWithGoogle().then((user) => console.log('Signed in with Google!', user))
+          }}
           preElement={
             <Icon name={'google'} size={20} color={colors.app.white} />
           }
