@@ -8,19 +8,22 @@ import Logo from '@components/Logo';
 import {LoginForm} from '@components/forms';
 import useRouteNavigation from '@hooks/useRouteNavigation';
 import { RouteEnums } from '@navigation/Routes';
+import useFirebaseAuth from '@hooks/useFirebaseAuth';
 
 function LoginScreen() {
   const {colors} = useTheme();
   const {navigate} = useRouteNavigation()
+  const {firebaseAuth} = useFirebaseAuth()
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onSubmit = (data: Record<string, unknown>) =>
+  const onSubmit = async (data: Record<string, unknown|string>) =>{
     console.log(JSON.stringify(data));
+    const user = await firebaseAuth.createUserWithEmailAndPassword(data?.email as string, data?.password as string)  
+    console.log(user)
+  }
 
-  useEffect(() => {
-    if (isLoading) setTimeout(() => setIsLoading(false), 2000);
-  }, [isLoading]);
+    // const loginWithGoogle = () => {
+      
+    // }
 
   return (
     <Screen style={styles.container}>
@@ -31,8 +34,7 @@ function LoginScreen() {
         <Button
           variant="primary"
           title={'Sign in with Google'}
-          onPress={() => setIsLoading(true)}
-          isLoading={isLoading}
+          onPress={() => {}}
           preElement={
             <Icon name={'google'} size={20} color={colors.app.white} />
           }
