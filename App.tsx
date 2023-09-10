@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 
-import { ThemeProvider } from '@context/theme/themeProvider';
+import { ThemeProvider } from '@context/theme/ThemeProvider';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthNavigator from '@navigation/AuthNavigator';
 import auth from '@react-native-firebase/auth';

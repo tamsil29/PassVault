@@ -3,7 +3,7 @@ import {View, StyleSheet, TextInputProps} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {FormField} from '@components/forms';
-import {useTheme} from '@context/theme/themeProvider';
+import { useTheme } from '@context/theme/ThemeProvider';
 import { FormFieldProps } from '@components/forms/FormField';
 
 

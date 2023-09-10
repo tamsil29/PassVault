@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import {StyleProp, StyleSheet, Text, TextProps, TextStyle} from 'react-native';
 
-import { useTheme } from '@context/theme/themeProvider';
+import { useTheme } from '@context/theme/ThemeProvider';
 
 interface Props {
   children: React.ReactNode;

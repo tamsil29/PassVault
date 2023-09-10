@@ -11,7 +11,7 @@ import {
 
 import {TextInput} from '@components/core';
 import {ErrorMessage} from '@components/forms';
-import {useTheme} from '@context/theme/themeProvider';
+import { useTheme } from '@context/theme/ThemeProvider';
 import {UseControllerProps, useController} from 'react-hook-form';
 
 export interface FormFieldProps extends UseControllerProps {

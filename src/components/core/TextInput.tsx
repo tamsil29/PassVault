@@ -9,7 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import {useTheme} from '@context/theme/themeProvider';
+import { useTheme } from '@context/theme/ThemeProvider';
 
 interface Props {
   preElement?: ReactNode;
