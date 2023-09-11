@@ -1,6 +1,6 @@
 const utility = {
   success: '#52c41a',
-  danger: '#f5222d',
+  danger: '#ff4d4f',
   warning: '#faad14',
   info: '#13c2c2',
 };

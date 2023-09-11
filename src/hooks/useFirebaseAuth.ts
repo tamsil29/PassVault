@@ -5,6 +5,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import settings from '../config/settings'
+import {ToastAndroid, StatusBar} from 'react-native';
 
 const useFirebaseAuth = () => {
   const firebaseAuth = auth();
@@ -21,6 +22,7 @@ const useFirebaseAuth = () => {
     } catch (error: any) {
       console.log({error})
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        ToastAndroid.show('Sign in cancelled', 1000)
         // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {
         // operation (e.g. sign in) is in progress already
