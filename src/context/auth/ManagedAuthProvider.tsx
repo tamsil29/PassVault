@@ -13,10 +13,6 @@ function ManagedAuthProvider() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-});
-
 export default ManagedAuthProvider;
 
 function AuthManager() {
