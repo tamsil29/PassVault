@@ -2,31 +2,38 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { useTheme } from '@context/theme/ThemeProvider';
+import {useTheme} from '@context/theme/ThemeProvider';
 import {Screen, Button, Typography} from '@components/core';
 import Logo from '@components/Logo';
 import {LoginForm} from '@components/forms';
 import useRouteNavigation from '@hooks/useRouteNavigation';
-import { RouteEnums } from '@navigation/Routes';
+import {RouteEnums} from '@navigation/Routes';
 import useFirebaseAuth from '@hooks/useFirebaseAuth';
 import useUser from '@shared/hooks/useUser';
 
 function LoginScreen() {
   const {colors} = useTheme();
-  const {navigate} = useRouteNavigation()
-  const {firebaseAuth, signInWithGoogle} = useFirebaseAuth()
-  const {setUser} = useUser()
+  const {navigate} = useRouteNavigation();
+  const {firebaseAuth, signInWithGoogle} = useFirebaseAuth();
+  const {setOrUpdateUser} = useUser();
 
-  const onSubmit = async (data: Record<string, unknown|string>) =>{
+  const onSubmit = async (data: Record<string, unknown | string>) => {
     console.log(JSON.stringify(data));
-    const user = await firebaseAuth.createUserWithEmailAndPassword(data?.email as string, data?.password as string)  
-    console.log(user)
-    setUser({name: user.user.displayName as string, email: data.email as string})
-  }
+    const user = await firebaseAuth.createUserWithEmailAndPassword(
+      data?.email as string,
+      data?.password as string,
+    );
+    console.log(user);
+    setOrUpdateUser({
+      name: user.user.displayName as string,
+      email: data.email as string,
+      id: user.user.uid,
+    });
+  };
 
-    // const loginWithGoogle = () => {
-      
-    // }
+  // const loginWithGoogle = () => {
+
+  // }
 
   return (
     <Screen style={styles.container}>
@@ -38,7 +45,9 @@ function LoginScreen() {
           variant="primary"
           title={'Sign in with Google'}
           onPress={() => {
-            signInWithGoogle().then((user) => console.log('Signed in with Google!', user))
+            signInWithGoogle().then(user =>
+              console.log('Signed in with Google!', user),
+            );
           }}
           preElement={
             <Icon name={'google'} size={20} color={colors.app.white} />
