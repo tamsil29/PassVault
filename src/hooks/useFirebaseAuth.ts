@@ -22,14 +22,16 @@ const useFirebaseAuth = () => {
     } catch (error: any) {
       console.log({error})
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        ToastAndroid.show('Sign in cancelled', 1000)
         // user cancelled the login flow
+        ToastAndroid.show('Sign in cancelled', 1000)
       } else if (error.code === statusCodes.IN_PROGRESS) {
         // operation (e.g. sign in) is in progress already
+        ToastAndroid.show('Sign in already in progress', 1000)
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         // play services not available or outdated
+        ToastAndroid.show('Google play services are not applicable', 1000)
       } else {
-        // some other error happened
+        ToastAndroid.show('Something went wrong when loggin in', 1000)
       }
     }
   }, []);
