@@ -9,16 +9,19 @@ import {LoginForm} from '@components/forms';
 import useRouteNavigation from '@hooks/useRouteNavigation';
 import { RouteEnums } from '@navigation/Routes';
 import useFirebaseAuth from '@hooks/useFirebaseAuth';
+import useUser from '@shared/hooks/useUser';
 
 function LoginScreen() {
   const {colors} = useTheme();
   const {navigate} = useRouteNavigation()
   const {firebaseAuth, signInWithGoogle} = useFirebaseAuth()
+  const {setUser} = useUser()
 
   const onSubmit = async (data: Record<string, unknown|string>) =>{
     console.log(JSON.stringify(data));
     const user = await firebaseAuth.createUserWithEmailAndPassword(data?.email as string, data?.password as string)  
     console.log(user)
+    setUser({name: user.user.displayName as string, email: data.email as string})
   }
 
     // const loginWithGoogle = () => {

@@ -34,7 +34,7 @@ const useFirebaseAuth = () => {
         ToastAndroid.show('Something went wrong when loggin in', 1000)
       }
     }
-  }, []);
+  }, [GoogleSignin, auth]);
 
   return {firebaseAuth, signInWithGoogle};
 };
