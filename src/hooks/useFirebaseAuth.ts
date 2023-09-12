@@ -18,7 +18,7 @@ const useFirebaseAuth = () => {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       const googleCredential = auth.GoogleAuthProvider.credential(userInfo.idToken);
-      await firebaseAuth.signInWithCredential(googleCredential);
+      return await firebaseAuth.signInWithCredential(googleCredential);
     } catch (error: any) {
       console.log({error})
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -33,6 +33,7 @@ const useFirebaseAuth = () => {
       } else {
         ToastAndroid.show('Something went wrong when loggin in', 1000)
       }
+      return null
     }
   }, [GoogleSignin, auth]);
 

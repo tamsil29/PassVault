@@ -15,7 +15,7 @@ function LoginScreen() {
   const {colors} = useTheme();
   const {navigate} = useRouteNavigation();
   const {firebaseAuth, signInWithGoogle} = useFirebaseAuth();
-  const {setOrUpdateUser} = useUser();
+  const {googleLogin} = useUser();
 
   const onSubmit = async (data: Record<string, unknown | string>) => {
     console.log(JSON.stringify(data));
@@ -24,11 +24,11 @@ function LoginScreen() {
       data?.password as string,
     );
     console.log(user);
-    setOrUpdateUser({
-      name: user.user.displayName as string,
-      email: data.email as string,
-      id: user.user.uid,
-    });
+    // setOrUpdateUser({
+    //   name: user.user.displayName as string,
+    //   email: data.email as string,
+    //   id: user.user.uid,
+    // });
   };
 
   // const loginWithGoogle = () => {
@@ -45,9 +45,15 @@ function LoginScreen() {
           variant="primary"
           title={'Sign in with Google'}
           onPress={() => {
-            signInWithGoogle().then(user =>
-              console.log('Signed in with Google!', user),
-            );
+            signInWithGoogle().then(user => {
+              console.log('Signed in with Google!', user);
+              if (user)
+                googleLogin({
+                  id: user.user.uid,
+                  email: user.user.email as string,
+                  name: user.user.displayName as string,
+                });
+            });
           }}
           preElement={
             <Icon name={'google'} size={20} color={colors.app.white} />
