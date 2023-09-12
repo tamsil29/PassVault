@@ -10,12 +10,15 @@ import useRouteNavigation from '@hooks/useRouteNavigation';
 import {RouteEnums} from '@navigation/Routes';
 import useFirebaseAuth from '@hooks/useFirebaseAuth';
 import useUser from '@shared/hooks/useUser';
+import {useAuth} from '@context/auth/AuthProvider';
+import {User} from '@shared/types';
 
 function LoginScreen() {
   const {colors} = useTheme();
   const {navigate} = useRouteNavigation();
   const {firebaseAuth, signInWithGoogle} = useFirebaseAuth();
   const {googleLogin} = useUser();
+  const {user, updateUser} = useAuth();
 
   const onSubmit = async (data: Record<string, unknown | string>) => {
     console.log(JSON.stringify(data));
@@ -31,9 +34,21 @@ function LoginScreen() {
     // });
   };
 
-  // const loginWithGoogle = () => {
-
-  // }
+  const loginWithGoogle = async () => {
+    try {
+      const googleUser = await signInWithGoogle();
+      if (googleUser) {
+        const user = await googleLogin({
+          id: googleUser.user.uid,
+          email: googleUser.user.email as string,
+          name: googleUser.user.displayName as string,
+        });
+        updateUser(user as User);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Screen style={styles.container}>
@@ -44,17 +59,7 @@ function LoginScreen() {
         <Button
           variant="primary"
           title={'Sign in with Google'}
-          onPress={() => {
-            signInWithGoogle().then(user => {
-              console.log('Signed in with Google!', user);
-              if (user)
-                googleLogin({
-                  id: user.user.uid,
-                  email: user.user.email as string,
-                  name: user.user.displayName as string,
-                });
-            });
-          }}
+          onPress={loginWithGoogle}
           preElement={
             <Icon name={'google'} size={20} color={colors.app.white} />
           }

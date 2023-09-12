@@ -8,7 +8,7 @@ const useUser = () => {
   const {firestore, firestoreRef} = useFireStore();
 
   const googleLogin = async (user: User) => {
-    await getUser(user.id).then(documentSnapshot => {
+    return await getUser(user.id).then(documentSnapshot => {
       if (documentSnapshot.exists) return documentSnapshot.data();
       else createUser(user).then(() => getUser(user.id));
     });
