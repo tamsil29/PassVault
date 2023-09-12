@@ -11,7 +11,11 @@ const useUser = () => {
     await firestore.collection(collection).doc(user.id).set(user);
   }
 
-  return {setOrUpdateUser};
+  const getUser = async (user: User) => {
+    return await firestore.collection(collection).doc(user.id).get()
+  }
+
+  return {setOrUpdateUser, getUser};
 };
 
 export default useUser;

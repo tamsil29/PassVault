@@ -2,36 +2,27 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { useTheme } from '@context/theme/ThemeProvider';
+import {useTheme} from '@context/theme/ThemeProvider';
 import {Screen, Button, Typography} from '@components/core';
 import Logo from '@components/Logo';
 import {SignupForm} from '@components/forms';
 import useRouteNavigation from '@hooks/useRouteNavigation';
-import { RouteEnums } from '@navigation/Routes';
+import {RouteEnums} from '@navigation/Routes';
+import { SignupFromType } from '@shared/validators/SignupForm';
 
 function SignUpScreen() {
   const {colors} = useTheme();
-  const {navigate} = useRouteNavigation()
+  const {navigate} = useRouteNavigation();
 
-  const onSubmit = (data: Record<string, unknown>) =>
-    console.log(JSON.stringify(data));
+  const onSubmit = (formData: SignupFromType) => {
+    console.log(formData);
+  };
 
   return (
     <Screen style={styles.container}>
       <Logo style={styles.logo} />
       <View style={styles.formContainer}>
         <SignupForm onSubmit={onSubmit} />
-        {/* <Typography variant="b3">OR</Typography>
-        <Button
-          variant="primary"
-          title={'Sign in with Google'}
-          onPress={() => setIsLoading(true)}
-          isLoading={isLoading}
-          preElement={
-            <Icon name={'google'} size={20} color={colors.app.white} />
-          }
-          style={{backgroundColor: colors.app.secondary}}
-        /> */}
       </View>
 
       <Button
