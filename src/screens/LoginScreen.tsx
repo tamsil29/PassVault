@@ -18,7 +18,6 @@ function LoginScreen() {
   const {navigate} = useRouteNavigation();
   const {firebaseAuth, signInWithGoogle} = useFirebaseAuth();
   const {googleLogin} = useUser();
-  const {user, updateUser} = useAuth();
 
   const onSubmit = async (data: Record<string, unknown | string>) => {
     console.log(JSON.stringify(data));
@@ -38,12 +37,11 @@ function LoginScreen() {
     try {
       const googleUser = await signInWithGoogle();
       if (googleUser) {
-        const user = await googleLogin({
+        await googleLogin({
           id: googleUser.user.uid,
           email: googleUser.user.email as string,
           name: googleUser.user.displayName as string,
         });
-        updateUser(user as User);
       }
     } catch (err) {
       console.log(err);

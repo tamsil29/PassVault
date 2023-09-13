@@ -4,6 +4,8 @@ import {AuthProvider, useAuth} from './AuthProvider';
 import CredetentialListing from '@screens/CredetentialListing';
 import AuthNavigator from '@navigation/AuthNavigator';
 import auth from '@react-native-firebase/auth';
+import useUser from '@shared/hooks/useUser';
+import { User } from '@shared/types';
 
 function ManagedAuthProvider() {
   return (
@@ -16,14 +18,21 @@ function ManagedAuthProvider() {
 export default ManagedAuthProvider;
 
 function AuthManager() {
-  //   const {user} = useAuth();
-  const [user, setUser] = useState(null as any);
+    const {user, updateUser} = useAuth();
+  // const [user, setUser] = useState(null as any);
+  const {getUser} = useUser()
 
   useEffect(() => {
-    auth().onAuthStateChanged(userState => {
+    auth().onAuthStateChanged(async (userState) => {
       console.log(userState);
-      if (userState) setUser(userState);
-      else setUser(null);
+      if(userState) {
+        const user = await getUser(userState.uid)
+        updateUser(user as unknown as User)
+      }else{
+        updateUser(null as any)
+      }
+      // if (userState) setUser(userState);
+      // else setUser(null);
     });
   }, []);
 
