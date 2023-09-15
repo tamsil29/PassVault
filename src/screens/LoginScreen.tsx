@@ -5,27 +5,34 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTheme} from '@context/theme/ThemeProvider';
 import {Screen, Button, Typography} from '@components/core';
 import Logo from '@components/Logo';
-import {LoginForm} from '@components/forms';
+import {ErrorMessage, LoginForm} from '@components/forms';
 import useRouteNavigation from '@hooks/useRouteNavigation';
 import {RouteEnums} from '@navigation/Routes';
 import useFirebaseAuth from '@hooks/useFirebaseAuth';
 import useUser from '@shared/hooks/useUser';
 import {useAuth} from '@context/auth/AuthProvider';
 import {User} from '@shared/types';
+import {useApi} from '@shared/hooks/core';
+import {LoginCredentialsType} from '@shared/validators/LoginForm';
 
 function LoginScreen() {
   const {colors} = useTheme();
   const {navigate} = useRouteNavigation();
-  const {firebaseAuth, signInWithGoogle} = useFirebaseAuth();
+  const {firebaseAuth, signInWithGoogle, signInWithPassword} =
+    useFirebaseAuth();
   const {googleLogin} = useUser();
 
-  const onSubmit = async (data: Record<string, unknown | string>) => {
+  const {request: loginGoogleUser} = useApi(googleLogin, true);
+  const {request, error} = useApi(firebaseAuth.signInWithEmailAndPassword, true);
+
+  const onSubmit = async (data: LoginCredentialsType) => {
     console.log(JSON.stringify(data));
-    const user = await firebaseAuth.createUserWithEmailAndPassword(
-      data?.email as string,
-      data?.password as string,
-    );
-    console.log(user);
+    await request(data?.email, data?.password);
+    // const user = await firebaseAuth.signInWithEmailAndPassword(
+    //   data?.email as string,
+    //   data?.password as string,
+    // );
+    // console.log(user);
     // setOrUpdateUser({
     //   name: user.user.displayName as string,
     //   email: data.email as string,
@@ -34,17 +41,13 @@ function LoginScreen() {
   };
 
   const loginWithGoogle = async () => {
-    try {
-      const googleUser = await signInWithGoogle();
-      if (googleUser) {
-        await googleLogin({
-          id: googleUser.user.uid,
-          email: googleUser.user.email as string,
-          name: googleUser.user.displayName as string,
-        });
-      }
-    } catch (err) {
-      console.log(err);
+    const googleUser = await signInWithGoogle();
+    if (googleUser) {
+      await loginGoogleUser({
+        id: googleUser.user.uid,
+        email: googleUser.user.email as string,
+        name: googleUser.user.displayName as string,
+      });
     }
   };
 
@@ -52,7 +55,7 @@ function LoginScreen() {
     <Screen style={styles.container}>
       <Logo style={styles.logo} />
       <View style={styles.formContainer}>
-        <LoginForm onSubmit={onSubmit} />
+        <LoginForm onSubmit={signInWithPassword} />
         <Typography variant="b3">OR</Typography>
         <Button
           variant="primary"

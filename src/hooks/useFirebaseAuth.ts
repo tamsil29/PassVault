@@ -6,6 +6,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import settings from '../config/settings'
 import {ToastAndroid, StatusBar} from 'react-native';
+import { LoginCredentialsType } from '@shared/validators/LoginForm';
 
 const useFirebaseAuth = () => {
   const firebaseAuth = auth();
@@ -37,7 +38,15 @@ const useFirebaseAuth = () => {
     }
   }, [GoogleSignin, auth]);
 
-  return {firebaseAuth, signInWithGoogle};
+  const signInWithPassword = async (credentials: LoginCredentialsType) => {
+    try{
+      const res = await firebaseAuth.signInWithEmailAndPassword(credentials.email, credentials.password);
+    }catch(err:any){
+      ToastAndroid.show('Email or password is incorrect', 2000)
+    }
+  }
+
+  return {firebaseAuth, signInWithGoogle, signInWithPassword};
 };
 
 export default useFirebaseAuth;

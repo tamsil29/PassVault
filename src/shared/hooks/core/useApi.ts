@@ -24,6 +24,7 @@ const useApi = <TRequest, TResponse>(
       return response
     } catch (error: any) {
       setError(error);
+      console.log(error)
       return null
     } finally {
       setLoading(false);

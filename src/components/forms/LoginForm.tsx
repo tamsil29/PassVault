@@ -5,36 +5,28 @@ import {StyleSheet} from 'react-native';
 import {z} from 'zod';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {FormField} from '@components/forms';
-import { useTheme } from '@context/theme/ThemeProvider';
+import {FormField, PasswordFormField} from '@components/forms';
+import {useTheme} from '@context/theme/ThemeProvider';
 import {Button} from '@components/core';
+import {
+  LoginCredentialsType,
+  LoginValidationSchema,
+} from '@shared/validators/LoginForm';
 
 interface Props {
   onSubmit: Dispatch<any>;
 }
 
 function LoginForm({onSubmit}: Props) {
-  const validationSchema = z
-    .object({
-      email: z.string().nonempty('Email is required').email(),
-      password: z
-        .string()
-        .nonempty('Password is required')
-        .min(8, {message: 'Password must be at least 8 characters'}),
-    })
-    .required();
-
   const {colors} = useTheme();
 
-  type CredentialsType = z.infer<typeof validationSchema>;
-
-  const {...methods} = useForm<CredentialsType>({
+  const {...methods} = useForm<LoginCredentialsType>({
     defaultValues: {
       email: '',
       password: '',
     },
-    resolver: zodResolver(validationSchema),
-    mode: 'onTouched'
+    resolver: zodResolver(LoginValidationSchema),
+    mode: 'onTouched',
   });
 
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -48,31 +40,7 @@ function LoginForm({onSubmit}: Props) {
           <Icon name={'email-outline'} size={25} color={colors.theme.text} />
         }
       />
-      <FormField
-        textContentType="password"
-        secureTextEntry={!passwordVisible}
-        placeholder="Password"
-        name={'password'}
-        preElement={
-          <Icon
-            name={
-              passwordVisible ? 'lock-open-variant-outline' : 'lock-outline'
-            }
-            size={25}
-            color={colors.theme.text}
-          />
-        }
-        postElement={
-          <Icon
-            name={passwordVisible ? 'eye-outline' : 'eye-off-outline'}
-            size={25}
-            color={
-              passwordVisible ? colors.theme.text : colors.theme.secondaryText
-            }
-            onPress={() => setPasswordVisible(!passwordVisible)}
-          />
-        }
-      />
+      <PasswordFormField name={'password'} placeholder={'Password'} />
       <Button
         variant="primary"
         title={'Login'}
