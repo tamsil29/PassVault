@@ -29,7 +29,7 @@ const useFirebaseAuth = () => {
         ToastAndroid.show('Sign in already in progress', 1000)
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         // play services not available or outdated
-        ToastAndroid.show('Google play services are not applicable', 1000)
+        ToastAndroid.show('Google play services are not available', 1000)
       } else {
         ToastAndroid.show('Something went wrong when loggin in', 1000)
       }
