@@ -1,10 +1,6 @@
 
 import { useFirebaseFunctions } from "@shared/mappers";
 
-interface Props{
-    functionName: any;
-    data:any
-}
   export const callFirebaseFunction = async <
   TRequest,
   TResponse
