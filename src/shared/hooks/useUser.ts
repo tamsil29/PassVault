@@ -1,4 +1,4 @@
-import useFireStore from '@hooks/useFireStore';
+import { useFireStore } from '@shared/mappers';
 import {User} from '@shared/types';
 import React from 'react';
 
