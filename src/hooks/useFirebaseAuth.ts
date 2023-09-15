@@ -21,7 +21,6 @@ const useFirebaseAuth = () => {
       const googleCredential = auth.GoogleAuthProvider.credential(userInfo.idToken);
       return await firebaseAuth.signInWithCredential(googleCredential);
     } catch (error: any) {
-      console.log({error})
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
         ToastAndroid.show('Sign in cancelled', 1000)

@@ -1,44 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {useTheme} from '@context/theme/ThemeProvider';
 import {Screen, Button, Typography} from '@components/core';
 import Logo from '@components/Logo';
-import {ErrorMessage, LoginForm} from '@components/forms';
+import {LoginForm} from '@components/forms';
 import useRouteNavigation from '@hooks/useRouteNavigation';
 import {RouteEnums} from '@navigation/Routes';
 import useFirebaseAuth from '@hooks/useFirebaseAuth';
 import useUser from '@shared/hooks/useUser';
-import {useAuth} from '@context/auth/AuthProvider';
-import {User} from '@shared/types';
 import {useApi} from '@shared/hooks/core';
-import {LoginCredentialsType} from '@shared/validators/LoginForm';
 
 function LoginScreen() {
   const {colors} = useTheme();
   const {navigate} = useRouteNavigation();
-  const {firebaseAuth, signInWithGoogle, signInWithPassword} =
-    useFirebaseAuth();
+  
   const {googleLogin} = useUser();
-
   const {request: loginGoogleUser} = useApi(googleLogin, true);
-  const {request, error} = useApi(firebaseAuth.signInWithEmailAndPassword, true);
-
-  const onSubmit = async (data: LoginCredentialsType) => {
-    console.log(JSON.stringify(data));
-    await request(data?.email, data?.password);
-    // const user = await firebaseAuth.signInWithEmailAndPassword(
-    //   data?.email as string,
-    //   data?.password as string,
-    // );
-    // console.log(user);
-    // setOrUpdateUser({
-    //   name: user.user.displayName as string,
-    //   email: data.email as string,
-    //   id: user.user.uid,
-    // });
-  };
+  const {signInWithGoogle, signInWithPassword} = useFirebaseAuth();
 
   const loginWithGoogle = async () => {
     const googleUser = await signInWithGoogle();
