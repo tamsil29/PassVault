@@ -54,7 +54,7 @@ function Button({
       default:
         return {};
     }
-  }, [colors]);
+  }, [colors, variant]);
 
   const textColors = useMemo(() => {
     switch (variant) {
@@ -69,7 +69,7 @@ function Button({
       default:
         return {};
     }
-  }, [colors]);
+  }, [colors, variant]);
 
   const disabledStyle = useMemo(() => {
     return disabled || isLoading ? styles.disabled : {};

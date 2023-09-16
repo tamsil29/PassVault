@@ -7,6 +7,7 @@ import {
 } from './context';
 import React from 'react';
 import {Settings} from 'react-native';
+import useFirebaseAuth from '@hooks/useFirebaseAuth';
 
 const AuthProvider: React.FC<{children: React.ReactNode}> = props => {
   const [state, dispatch] = React.useReducer(authReducer, initialAuthState);
@@ -19,6 +20,7 @@ const useAuth = () => {
     throw new Error('useAuth must be used in AuthProvider');
 
   const [state, dispatch] = context;
+  const {firebaseAuth} = useFirebaseAuth();
 
   const updateUser = React.useCallback(
     (value: User) => {
@@ -34,13 +36,19 @@ const useAuth = () => {
     [dispatch],
   );
 
+  const firebaseUser = React.useMemo(
+    () => firebaseAuth.currentUser,
+    [firebaseAuth],
+  );
+
   const value = React.useMemo(
     () => ({
       ...state,
+      firebaseUser,
       updateUser,
       updateUserSettings,
     }),
-    [state, updateUser, updateUserSettings],
+    [state, firebaseUser, updateUser, updateUserSettings],
   );
 
   return value;

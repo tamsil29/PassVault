@@ -15,7 +15,7 @@ import {useApi} from '@shared/hooks/core';
 function LoginScreen() {
   const {colors} = useTheme();
   const {navigate} = useRouteNavigation();
-  
+
   const {googleLogin} = useUser();
   const {request: loginGoogleUser} = useApi(googleLogin, true);
   const {signInWithGoogle, signInWithPassword} = useFirebaseAuth();
@@ -48,11 +48,20 @@ function LoginScreen() {
         />
       </View>
 
-      <Button
-        variant="naked"
-        title={'Create an account?'}
-        onPress={() => navigate(RouteEnums.SIGNUP_SCREEN)}
-      />
+      <View style={styles.bottomSection}>
+        <Button
+          variant="naked"
+          title={'Create an account'}
+          onPress={() => navigate(RouteEnums.SIGNUP_SCREEN)}
+          stretch
+        />
+        <Button
+          variant="naked"
+          title={'Forgot password?'}
+          onPress={() => navigate(RouteEnums.FORGOT_PASSWORD_SCREEN)}
+          stretch
+        />
+      </View>
     </Screen>
   );
 }
@@ -62,6 +71,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     justifyContent: 'space-between',
+  },
+  bottomSection: {
+    flexDirection: 'row',
   },
   formContainer: {
     alignItems: 'center',
