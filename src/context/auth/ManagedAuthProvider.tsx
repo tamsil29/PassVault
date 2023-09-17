@@ -39,7 +39,7 @@ function AuthManager() {
     });
   }, []);
 
-  if(loading) return <ActivityIndicator visible={true}/>
+  if (loading) return <ActivityIndicator visible={true}/>
   if (user) return <CredetentialListing />;
   else return <AuthNavigator />;
 }
