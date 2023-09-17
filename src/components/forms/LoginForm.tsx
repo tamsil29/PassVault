@@ -2,7 +2,6 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import React, {Dispatch, useState} from 'react';
 import {FormProvider, useForm} from 'react-hook-form';
 import {StyleSheet} from 'react-native';
-import {z} from 'zod';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {FormField, PasswordFormField} from '@components/forms';
@@ -14,7 +13,7 @@ import {
 } from '@shared/validators/LoginForm';
 
 interface Props {
-  onSubmit: Dispatch<any>;
+  onSubmit: Dispatch<LoginCredentialsType>;
 }
 
 function LoginForm({onSubmit}: Props) {
@@ -29,7 +28,6 @@ function LoginForm({onSubmit}: Props) {
     mode: 'onTouched',
   });
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
   return (
     <FormProvider {...methods}>
       <FormField
