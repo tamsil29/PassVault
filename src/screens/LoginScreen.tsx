@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -20,8 +20,10 @@ function LoginScreen() {
   const {googleLogin} = useUser();
   const {request: loginGoogleUser} = useApi(googleLogin, true);
   const {signInWithGoogle, signInWithPassword} = useFirebaseAuth();
+  const [signingIn, setSigningIn] = useState(false)
 
   const loginWithGoogle = async () => {
+    setSigningIn(true)
     const googleUser = await signInWithGoogle();
     if (googleUser) {
       await loginGoogleUser({
@@ -30,6 +32,7 @@ function LoginScreen() {
         name: googleUser.user.displayName as string,
       });
     }
+    setSigningIn(false)
   };
 
   return (
@@ -65,7 +68,7 @@ function LoginScreen() {
           />
         </View>
       </Screen>
-      <ActivityIndicator visible={false}/>
+      <ActivityIndicator visible={signingIn}/>
     </>
   );
 }
