@@ -8,6 +8,7 @@ import useUser from '@shared/hooks/useUser';
 import {User} from '@shared/types';
 import {useApi} from '@shared/hooks/core';
 import { Typography } from '@components/core';
+import { ActivityIndicator } from '@components/index';
 
 function ManagedAuthProvider() {
   return (
@@ -38,7 +39,7 @@ function AuthManager() {
     });
   }, []);
 
-  if(loading) return <Typography>loading...</Typography>
+  if(loading) return <ActivityIndicator visible={true}/>
   if (user) return <CredetentialListing />;
   else return <AuthNavigator />;
 }
