@@ -14,7 +14,7 @@ function ActivityIndicator({ visible }: { visible: boolean }) {
 const styles = StyleSheet.create({
     overlay: {
         alignItems: 'center',
-        backgroundColor: 'rgba(255,255,355,0.3)',
+        backgroundColor: 'rgba(255,255,355,0.4)',
         position: 'absolute',
         height: '100%',
         width : '100%',
