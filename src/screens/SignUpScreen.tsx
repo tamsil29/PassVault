@@ -8,21 +8,18 @@ import Logo from '@components/Logo';
 import {SignupForm} from '@components/forms';
 import useRouteNavigation from '@hooks/useRouteNavigation';
 import {RouteEnums} from '@navigation/Routes';
-import { SignupFromType } from '@shared/validators/SignupForm';
+import useFirebaseAuth from '@hooks/useFirebaseAuth';
 
 function SignUpScreen() {
   const {colors} = useTheme();
   const {navigate} = useRouteNavigation();
-
-  const onSubmit = (formData: SignupFromType) => {
-    console.log(formData);
-  };
+  const {createNewUser} = useFirebaseAuth();
 
   return (
     <Screen style={styles.container}>
       <Logo style={styles.logo} />
       <View style={styles.formContainer}>
-        <SignupForm onSubmit={onSubmit} />
+        <SignupForm onSubmit={createNewUser} />
       </View>
 
       <Button

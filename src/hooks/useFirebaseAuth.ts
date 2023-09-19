@@ -7,9 +7,12 @@ import {
 import settings from '../config/settings'
 import {ToastAndroid, StatusBar} from 'react-native';
 import { LoginCredentialsType } from '@shared/validators/LoginForm';
+import useUser from '@shared/hooks/useUser';
+import { SignupFromType } from '@shared/validators/SignupForm';
 
 const useFirebaseAuth = () => {
   const firebaseAuth = auth();
+  const {createUser} = useUser();
 
   const signInWithGoogle = useCallback(async () => {
     GoogleSignin.configure({
@@ -45,7 +48,31 @@ const useFirebaseAuth = () => {
     }
   }
 
-  return {firebaseAuth, signInWithGoogle, signInWithPassword};
+  const createNewUser = async (details: SignupFromType) =>{
+    const {email, name, password} = details
+    try{
+      const user = await firebaseAuth.createUserWithEmailAndPassword(email, password);
+      if(user){
+        await createUser({ email, id: user.user.uid, name })
+      }
+    }catch(err:any){
+      switch(err.code){
+        case 'auth/email-already-in-use': 
+          ToastAndroid.show('Email is already in use', 2000)
+          break;
+        case 'auth/weak-password':
+          ToastAndroid.show('Password too weak', 2000)
+          break;
+        case 'auth/invalid-email':
+          ToastAndroid.show('Email is invalid', 2000);
+          break;
+        default:
+          ToastAndroid.show('User Cannot be created', 2000);
+      }
+    }
+  }
+
+  return {firebaseAuth, signInWithGoogle, signInWithPassword, createNewUser};
 };
 
 export default useFirebaseAuth;
