@@ -7,8 +7,8 @@ import auth from '@react-native-firebase/auth';
 import useUser from '@shared/hooks/useUser';
 import {User} from '@shared/types';
 import {useApi} from '@shared/hooks/core';
-import { Typography } from '@components/core';
-import { ActivityIndicator } from '@components/index';
+import {Typography} from '@components/core';
+import {ActivityIndicator} from '@components/index';
 
 function ManagedAuthProvider() {
   return (
@@ -31,7 +31,7 @@ function AuthManager() {
     auth().onAuthStateChanged(async userState => {
       console.log(userState);
       if (userState) {
-        if(userState.uid !== user?.id){
+        if (userState.uid !== user?.id) {
           const userInfo = await request();
           updateUser(userInfo as unknown as User);
         }
@@ -41,7 +41,7 @@ function AuthManager() {
     });
   }, []);
 
-  if (loading) return <ActivityIndicator visible={true}/>
+  if (loading) return <ActivityIndicator visible={true} />;
   if (user) return <CredetentialListing />;
   else return <AuthNavigator />;
 }
