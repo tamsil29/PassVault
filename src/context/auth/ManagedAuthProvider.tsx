@@ -31,8 +31,10 @@ function AuthManager() {
     auth().onAuthStateChanged(async userState => {
       console.log(userState);
       if (userState) {
-        const user = await request();
-        updateUser(user as unknown as User);
+        if(userState.uid !== user?.id){
+          const userInfo = await request();
+          updateUser(userInfo as unknown as User);
+        }
       } else {
         updateUser(null as any);
       }
